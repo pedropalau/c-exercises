@@ -2,6 +2,7 @@
 // arrays and making some operations like pop, push or shift.
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "arrays.h"
 
