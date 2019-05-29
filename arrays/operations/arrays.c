@@ -20,6 +20,9 @@
 #define OPTION_8 8
 #define OPTION_9 9
 
+/**
+ * Print the program options 
+ */
 void print_options()
 {
     printf("\n");
@@ -34,19 +37,97 @@ void print_options()
     printf("%d. Exit\n",    OPTION_9);
     printf("\n");
     printf("Select an option: ");
-    
 }
 
-void print_options_error()
+/**
+ * Print an error 
+ */
+void printf_error(char *message)
 {
     printf("\n");
-    printf(COLOR_RED "Select a valid option" COLOR_RESET "\n");
+    printf(COLOR_RED "Error: %s" COLOR_RESET "\n", message);
 }
 
+/**
+ * Print an error when an incorrect option is selected
+ */
+void print_options_error()
+{
+    printf_error("Invalid option selected");
+}
+
+/**
+ * Option callback: create an array with an specific size
+ */
+void option_create_array()
+{
+    printf("Option 1\n");
+}
+
+/**
+ * Push an element to the end of the array
+ */
+void option_push_array()
+{
+    printf("Option 2\n");
+}
+
+/**
+ * Pop an element from end of the array
+ */
+void option_pop_array()
+{
+    printf("Option 3\n");
+}
+
+/**
+ * Remove the first element from the array
+ */
+void option_shift_array()
+{
+    printf("Option 4\n");
+}
+
+/**
+ * Insert an element onto the array
+ */
+void option_insert_array()
+{
+    printf("Option 5\n");
+}
+
+/**
+ * Search an element on the array
+ */
+void option_search_array()
+{
+    printf("Option 6\n");
+}
+
+/**
+ * Calculate the product of elements of the array
+ */
+void option_product_array()
+{
+    printf("Option 7\n");
+}
+
+/**
+ * Count all elements from the array
+ */
+void option_count_array()
+{
+    printf("Option 8\n");
+}
+
+/**
+ * The main program
+ */
 int main(int argc, char const *argv[])
 {
     int MIN_OPTION = OPTION_1
       , MAX_OPTION = OPTION_9
+      , EXIT_OPTION = MAX_OPTION
       , selected = MIN_OPTION - 1;
 
     printf(COLOR_GREEN "/ ---------------------- /" COLOR_RESET "\n");
@@ -57,53 +138,55 @@ int main(int argc, char const *argv[])
 
     scanf("%d", &selected);
 
-    while (selected < MIN_OPTION || selected > MAX_OPTION)
+    while (selected != EXIT_OPTION)
     {
-        print_options_error();
+        if (selected < MIN_OPTION || selected > MAX_OPTION)
+        {
+            print_options_error();
+        }
+        
+        if (selected >= MIN_OPTION && selected <= MAX_OPTION && selected != EXIT_OPTION)
+        {
+            switch (selected)
+            {
+
+                case OPTION_2:
+                  option_push_array();
+                  break;
+
+                case OPTION_3:
+                  option_pop_array();
+                  break;
+
+                case OPTION_4:
+                  option_shift_array();
+                  break;
+
+                case OPTION_5:
+                  option_insert_array();
+                  break;
+
+                case OPTION_6:
+                  option_search_array();
+                  break;
+
+                case OPTION_7:
+                  option_product_array();
+                  break;
+
+                case OPTION_8:
+                  option_count_array();
+                  break;
+                
+                default:
+                  option_create_array();
+                  break;
+            }
+        }
 
         print_options();
 
         scanf("%d", &selected);
-    }
-    
-    switch (selected)
-    {
-
-        case OPTION_2:
-          printf("Option 2\n");
-          break;
-
-        case OPTION_3:
-          printf("Option 3\n");
-          break;
-
-        case OPTION_4:
-          printf("Option 4\n");
-          break;
-
-        case OPTION_5:
-          printf("Option 5\n");
-          break;
-
-        case OPTION_6:
-          printf("Option 6\n");
-          break;
-
-        case OPTION_7:
-          printf("Option 7\n");
-          break;
-
-        case OPTION_8:
-          printf("Option 8\n");
-          break;
-
-        case OPTION_9:
-          printf("Option 9\n");
-          break;
-        
-        default:
-          printf("Option 1\n");
-          break;
     }
 
     return 0;
