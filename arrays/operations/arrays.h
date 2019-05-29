@@ -4,16 +4,12 @@
 
 typedef struct array
 {
-    // The size or the capacity of this array, this is static
-    // and can't be changed once the array has been initialized
-    int size;
-
     // The `length` of the array. 
     // Represent the total items the array have.
     int count;
 
     // The items of the array
-    char *items;
+    int *items;
 } array;
 
 /**
