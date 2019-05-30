@@ -7,27 +7,27 @@
 
 #include "arrays.h"
 
-#define COLOR_GREEN  "\x1b[32m"
-#define COLOR_YELLOW "\x1b[33m"
-#define COLOR_RED    "\x1b[31m"
-#define COLOR_BLUE   "\x1b[34m"
-#define COLOR_RESET  "\x1b[0m"
+#define COLOR_GREEN     "\x1b[32m"
+#define COLOR_YELLOW    "\x1b[33m"
+#define COLOR_RED       "\x1b[31m"
+#define COLOR_BLUE      "\x1b[34m"
+#define COLOR_RESET     "\x1b[0m"
 
-#define TAB_SIZE "  "
-#define CHAR_REPEAT "-"
+#define TAB_SIZE        "  "
+#define CHAR_REPEAT     "-"
 
-#define OPTION_1 1
-#define OPTION_2 2
-#define OPTION_3 3
-#define OPTION_4 4
-#define OPTION_5 5
-#define OPTION_6 6
-#define OPTION_7 7
-#define OPTION_8 8
-#define OPTION_9 9
+#define OPTION_1        1
+#define OPTION_2        2
+#define OPTION_3        3
+#define OPTION_4        4
+#define OPTION_5        5
+#define OPTION_6        6
+#define OPTION_7        7
+#define OPTION_8        8
+#define OPTION_9        9
 
-#define ARRAY_MIN_SIZE 1
-#define ARRAY_MAX_SIZE 10
+#define ARRAY_MIN_SIZE  1
+#define ARRAY_MAX_SIZE  10
 
 /**
  * Print the program options 
@@ -71,21 +71,6 @@ char *repeat_str(const char *string, int size)
     {
         strcat(result, string);
     }
-
-    return result;
-}
-
-char *join_str(char *str1, const char *str2)
-{
-    char *result = malloc(strlen(str1) + strlen(str2));
-
-    if (result == NULL)
-    {
-        return NULL;
-    }
-
-    strcpy(result, str1);
-    strcat(result, str2);
 
     return result;
 }
