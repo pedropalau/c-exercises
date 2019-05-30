@@ -20,7 +20,12 @@ array *array_create(int size);
 /**
  * Push one element onto the end of array
  */
-void array_push(array *arr, int *item);
+void array_push(array *arr, int item);
+
+/**
+ * Set the element on the specific inex
+ */
+void array_set(array *arr, int item, int index);
 
 /**
  * Pop the element of the end of array
@@ -52,6 +57,11 @@ int array_product(array *arr);
  * Count all elements in an array
  */
 int array_count(array *arr);
+
+/**
+ * Delete the object
+ */
+void array_free(array *arr);
 
 /**
  * Checks if a value exists in an array

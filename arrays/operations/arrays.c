@@ -188,9 +188,28 @@ array *array_create(int size)
 /**
  * Push an element to the end of the array
  */
-void option_push_array()
+void option_push_array(array *arr)
 {
-    printf("Option 2\n");
+    int number;
+
+    printf_title("Push", OPTION_2);
+
+    printf("Type the element to push: ");
+
+    scanf("%d", &number);
+
+    array_push(arr, number);
+}
+
+void array_push(array *arr, int item)
+{
+    arr->items[arr->count] = item;
+    arr->count++;
+}
+
+void array_set(array *arr, int item, int index)
+{
+    arr->items[index] = item;
 }
 
 /**
@@ -270,11 +289,14 @@ int main(int argc, char const *argv[])
         
         if (selected >= MIN_OPTION && selected <= MAX_OPTION && selected != EXIT_OPTION)
         {
+            printf("\n");
+
             switch (selected)
             {
 
                 case OPTION_2:
-                  option_push_array();
+                  option_push_array(arr);
+                  print_array(arr);
                   break;
 
                 case OPTION_3:
