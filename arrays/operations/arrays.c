@@ -84,7 +84,47 @@ void printf_success(char *message, bool space)
  */
 void print_options_error()
 {
-    printf_error("Invalid option selected");
+    printf_error("Invalid option selected", true);
+}
+
+/**
+ * Helper function for printing an array
+ */
+void print_array(array *arr)
+{
+    if (arr)
+    {
+        int i;
+    
+        printf("Length: %d \n", arr->count);
+        printf("Elements: [");
+        
+        for (i = 0; i < arr->count; i++)
+        {
+            printf("%d", arr->items[i]);
+            if (i < arr->count - 1)
+            {
+                printf(",");
+            }
+        }
+        printf("]\n");
+    }
+    else
+    {
+        printf_error("Invalid array", true);
+    }
+}
+
+/**
+ * Delete the array and free the used memory
+ */
+void array_free(array *arr)
+{
+    if (arr)
+    {
+        free(arr->items);
+        free(arr);
+    }
 }
 
 /**
