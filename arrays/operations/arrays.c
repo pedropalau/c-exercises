@@ -45,12 +45,38 @@ void print_options()
 }
 
 /**
+ * Print a custom title
+ */
+void printf_title(char *message, int option)
+{   
+    printf(COLOR_GREEN);
+    printf("%d. %s", option, message);
+    printf(COLOR_RESET);
+    printf("\n\n");
+}
+
+/**
  * Print an error 
  */
-void printf_error(char *message)
+void printf_error(char *message, bool space)
 {
-    printf("\n");
+    if (space)
+    {
+        printf("\n");
+    }
     printf(COLOR_RED "Error: %s" COLOR_RESET "\n", message);
+}
+
+/**
+ * Print a success message
+ */
+void printf_success(char *message, bool space)
+{
+    if (space)
+    {
+        printf("\n");
+    }
+    printf(COLOR_GREEN "Success: %s" COLOR_RESET "\n", message);
 }
 
 /**
