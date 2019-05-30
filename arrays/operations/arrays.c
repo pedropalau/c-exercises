@@ -21,12 +21,16 @@
 #define OPTION_8 8
 #define OPTION_9 9
 
+#define ARRAY_MIN_SIZE 1
+#define ARRAY_MAX_SIZE 10
+
 /**
  * Print the program options 
  */
 void print_options()
 {
     printf("\n");
+    printf(COLOR_YELLOW "Options:\n\n" COLOR_RESET);
     printf("%d. Create\n",  OPTION_1);
     printf("%d. Push\n",    OPTION_2);
     printf("%d. Pop\n",     OPTION_3);
@@ -131,6 +135,8 @@ int main(int argc, char const *argv[])
       , EXIT_OPTION = MAX_OPTION
       , selected = MIN_OPTION - 1;
 
+    array *arr;
+
     printf(COLOR_GREEN "/ ---------------------- /" COLOR_RESET "\n");
     printf(COLOR_GREEN "  BASIC ARRAY OPERATIONS  " COLOR_RESET "\n");
     printf(COLOR_GREEN "/ ---------------------- /" COLOR_RESET "\n");
@@ -189,6 +195,8 @@ int main(int argc, char const *argv[])
 
         scanf("%d", &selected);
     }
+
+    array_free(arr);
 
     return 0;
 }
