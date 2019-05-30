@@ -215,9 +215,28 @@ void array_set(array *arr, int item, int index)
 /**
  * Pop an element from end of the array
  */
-void option_pop_array()
+int option_pop_array(array *arr)
 {
-    printf("Option 3\n");
+    printf_title("Pop", OPTION_3);
+    
+    int last = array_pop(arr);
+
+    return last;
+}
+
+int array_pop(array *arr)
+{
+    if (arr->count > 0)
+    {
+        int i = arr->count - 1;
+        int last = arr->items[i];
+        for (i; i < arr->count - 1; i++)
+        {
+            arr->items[i] = arr->items[i + 1];
+        }
+        arr->count -= 1;
+        return last;
+    }
 }
 
 /**
@@ -268,7 +287,8 @@ int main(int argc, char const *argv[])
     int MIN_OPTION = OPTION_1
       , MAX_OPTION = OPTION_9
       , EXIT_OPTION = MAX_OPTION
-      , selected = MIN_OPTION - 1;
+      , selected = MIN_OPTION - 1
+      , last_item;
 
     array *arr;
 
@@ -300,7 +320,9 @@ int main(int argc, char const *argv[])
                   break;
 
                 case OPTION_3:
-                  option_pop_array();
+                  last_item = option_pop_array(arr);
+                  printf("Last item: %d\n", last_item);
+                  print_array(arr);
                   break;
 
                 case OPTION_4:
