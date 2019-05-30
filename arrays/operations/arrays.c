@@ -130,9 +130,59 @@ void array_free(array *arr)
 /**
  * Option callback: create an array with an specific size
  */
-void option_create_array()
+array *option_create_array()
 {
-    printf("Option 1\n");
+    int size, element, index = 0;
+
+    printf_title("Create", OPTION_1);
+
+    printf("Insert the size of the array (value between 1 - 10): ");
+
+    scanf("%d", &size);
+
+    if (size < ARRAY_MIN_SIZE || size > ARRAY_MAX_SIZE)
+    {
+        while (size < ARRAY_MIN_SIZE || size > ARRAY_MAX_SIZE)
+        {
+            printf_error("Invalid size, please enter again", false);
+
+            printf("Insert the size of the array (value between 1 - 10): ");
+
+            scanf("%d", &size);
+
+        }
+    }
+
+    array *arr = array_create(size);
+
+    if (arr)
+    {
+        // Fill the array with entry values
+        for (index; index < size; index++)
+        {
+            printf("Enter element # %d: ", index + 1);
+            scanf("%d", &element);
+            array_set(arr, element, index);
+        }
+
+        printf_success("Array created", true);
+        printf("\n");
+    }
+
+    return arr;
+}
+
+array *array_create(int size)
+{
+    array *arr = (array *) malloc(sizeof(array));
+
+    if (arr)
+    {
+        arr->count = size;
+        arr->items = malloc(size * sizeof(int));
+    }
+
+    return arr;
 }
 
 /**
@@ -252,7 +302,8 @@ int main(int argc, char const *argv[])
                   break;
                 
                 default:
-                  option_create_array();
+                  arr = option_create_array();
+                  print_array(arr);
                   break;
             }
         }
