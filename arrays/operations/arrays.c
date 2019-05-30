@@ -3,13 +3,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "arrays.h"
 
 #define COLOR_GREEN  "\x1b[32m"
 #define COLOR_YELLOW "\x1b[33m"
 #define COLOR_RED    "\x1b[31m"
+#define COLOR_BLUE   "\x1b[34m"
 #define COLOR_RESET  "\x1b[0m"
+
+#define TAB_SIZE "  "
+#define CHAR_REPEAT "-"
 
 #define OPTION_1 1
 #define OPTION_2 2
@@ -30,18 +35,73 @@
 void print_options()
 {
     printf("\n");
-    printf(COLOR_YELLOW "Options:\n\n" COLOR_RESET);
-    printf("%d. Create\n",  OPTION_1);
-    printf("%d. Push\n",    OPTION_2);
-    printf("%d. Pop\n",     OPTION_3);
-    printf("%d. Shift\n",   OPTION_4);
-    printf("%d. Insert\n",  OPTION_5);
-    printf("%d. Search\n",  OPTION_6);
-    printf("%d. Product\n", OPTION_7);
-    printf("%d. Count\n",   OPTION_8);
-    printf("%d. Exit\n",    OPTION_9);
+    printf(TAB_SIZE COLOR_YELLOW "Options:\n\n" COLOR_RESET);
+    printf("%s[ %d ] Create\n",  TAB_SIZE, OPTION_1);
+    printf("%s[ %d ] Push\n",    TAB_SIZE, OPTION_2);
+    printf("%s[ %d ] Pop\n",     TAB_SIZE, OPTION_3);
+    printf("%s[ %d ] Shift\n",   TAB_SIZE, OPTION_4);
+    printf("%s[ %d ] Insert\n",  TAB_SIZE, OPTION_5);
+    printf("%s[ %d ] Search\n",  TAB_SIZE, OPTION_6);
+    printf("%s[ %d ] Product\n", TAB_SIZE, OPTION_7);
+    printf("%s[ %d ] Count\n",   TAB_SIZE, OPTION_8);
+    printf("%s[ %d ] Exit\n",    TAB_SIZE, OPTION_9);
     printf("\n");
-    printf("Select an option: ");
+    printf(TAB_SIZE "Select an option: ");
+}
+
+/**
+ * Helper function for repeating a char
+ */
+char *repeat_str(const char *string, int size)
+{
+    if (size == 0)
+    {
+        return NULL;
+    }
+
+    char *result = malloc(strlen(string) * size + size);
+
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    strcpy(result, string);
+    while (--size > 0) 
+    {
+        strcat(result, string);
+    }
+
+    return result;
+}
+
+char *join_str(char *str1, const char *str2)
+{
+    char *result = malloc(strlen(str1) + strlen(str2));
+
+    if (result == NULL)
+    {
+        return NULL;
+    }
+
+    strcpy(result, str1);
+    strcat(result, str2);
+
+    return result;
+}
+
+int count_digits(int number)
+{
+    int count = 0;
+    int n = number;
+
+    while (n > 0)
+    {
+        n /= 10;
+        count++;
+    }
+
+    return number == 0 ? 1 : count;
 }
 
 /**
@@ -50,7 +110,7 @@ void print_options()
 void printf_title(char *message, int option)
 {   
     printf(COLOR_GREEN);
-    printf("%d. %s", option, message);
+    printf(TAB_SIZE "%d. %s", option, message);
     printf(COLOR_RESET);
     printf("\n\n");
 }
@@ -64,7 +124,7 @@ void printf_error(char *message, bool space)
     {
         printf("\n");
     }
-    printf(COLOR_RED "Error: %s" COLOR_RESET "\n", message);
+    printf(TAB_SIZE COLOR_RED "Error: %s" COLOR_RESET "\n", message);
 }
 
 /**
@@ -76,7 +136,7 @@ void printf_success(char *message, bool space)
     {
         printf("\n");
     }
-    printf(COLOR_GREEN "Success: %s" COLOR_RESET "\n", message);
+    printf(TAB_SIZE COLOR_GREEN "Success: %s" COLOR_RESET "\n", message);
 }
 
 /**
@@ -95,19 +155,67 @@ void print_array(array *arr)
     if (arr)
     {
         int i;
-    
-        printf("Length: %d \n", arr->count);
-        printf("Elements: [");
+        char *digits;
+        const char *append = repeat_str(CHAR_REPEAT, 11);
+        const char *offset = repeat_str(CHAR_REPEAT, 2);
+        const char *string = repeat_str(CHAR_REPEAT, 5);
+
+        const char *count_repeat = repeat_str(CHAR_REPEAT, count_digits(arr->count));
+
+        printf(TAB_SIZE "%s%s%s\n", append, count_repeat, string);
+        printf(TAB_SIZE "| Length    | ");
+        printf(arr->count > 0 ? COLOR_YELLOW : COLOR_RED);
+        printf("%d", arr->count);
+        printf(COLOR_RESET);
+        printf(" |\n");
+
+        printf(TAB_SIZE "%s%s", append, offset);
+
+        // Print the repeater char based on the digits
+        if (arr->count > 0)
+        {
+            for (i = 0; i < arr->count; i++)
+            {
+                int count = count_digits(arr->items[i]);
+                printf("%s", repeat_str(CHAR_REPEAT, count + 3));
+            }
+        }
+        else
+        {
+            printf("%s", repeat_str(CHAR_REPEAT, 4));
+        }
+
+        printf("\n" TAB_SIZE "| Elements  | ");
+
+        if (arr->count == 0)
+        {
+            printf(COLOR_RED "x" COLOR_RESET " |");
+        }
         
         for (i = 0; i < arr->count; i++)
         {
+            printf(COLOR_YELLOW);
             printf("%d", arr->items[i]);
-            if (i < arr->count - 1)
+            printf(COLOR_RESET);
+            printf(" | ");
+        }
+        
+        printf("\n" TAB_SIZE "%s%s", append, offset);
+
+        if (arr->count > 0)
+        {
+            for (i = 0; i < arr->count; i++)
             {
-                printf(",");
+                int count = count_digits(arr->items[i]);
+                printf("%s", repeat_str(CHAR_REPEAT, count + 3));
             }
         }
-        printf("]\n");
+        else
+        {
+            printf("%s", repeat_str(CHAR_REPEAT, 4));
+        }
+
+        printf("\n");
     }
     else
     {
@@ -134,9 +242,9 @@ array *option_create_array()
 {
     int size, element, index = 0;
 
-    printf_title("Create", OPTION_1);
+    printf_title("Create array", OPTION_1);
 
-    printf("Insert the size of the array (value between 1 - 10): ");
+    printf(TAB_SIZE "Insert the size of the array (value between 1 - 10): ");
 
     scanf("%d", &size);
 
@@ -146,7 +254,7 @@ array *option_create_array()
         {
             printf_error("Invalid size, please enter again", false);
 
-            printf("Insert the size of the array (value between 1 - 10): ");
+            printf(TAB_SIZE "Insert the size of the array (value between 1 - 10): ");
 
             scanf("%d", &size);
 
@@ -160,7 +268,10 @@ array *option_create_array()
         // Fill the array with entry values
         for (index; index < size; index++)
         {
-            printf("Enter element # %d: ", index + 1);
+            printf(TAB_SIZE COLOR_BLUE " => " COLOR_RESET "Enter element ");
+            printf(COLOR_YELLOW);
+            printf("#%d: ", index + 1);
+            printf(COLOR_RESET);
             scanf("%d", &element);
             array_set(arr, element, index);
         }
@@ -194,9 +305,11 @@ void option_push_array(array *arr)
 
     printf_title("Push", OPTION_2);
 
-    printf("Type the element to push: ");
+    printf(TAB_SIZE "Type the element to push: ");
 
     scanf("%d", &number);
+
+    printf("\n");
 
     array_push(arr, number);
 }
@@ -290,11 +403,11 @@ int main(int argc, char const *argv[])
       , selected = MIN_OPTION - 1
       , last_item;
 
-    array *arr;
+    array *arr = array_create(0);
 
-    printf(COLOR_GREEN "/ ---------------------- /" COLOR_RESET "\n");
-    printf(COLOR_GREEN "  BASIC ARRAY OPERATIONS  " COLOR_RESET "\n");
-    printf(COLOR_GREEN "/ ---------------------- /" COLOR_RESET "\n");
+    printf(TAB_SIZE COLOR_GREEN "----------------------------------" COLOR_RESET "\n");
+    printf(TAB_SIZE COLOR_GREEN "|       BASIC ARRAY OPERATIONS   |" COLOR_RESET "\n");
+    printf(TAB_SIZE COLOR_GREEN "----------------------------------" COLOR_RESET "\n");
 
     print_options();
 
@@ -315,13 +428,28 @@ int main(int argc, char const *argv[])
             {
 
                 case OPTION_2:
-                  option_push_array(arr);
-                  print_array(arr);
+                  if (arr->count > 0)
+                  {
+                      option_push_array(arr);
+                      print_array(arr);
+                  }
+                  else
+                  {
+                      printf_error("Please, create an array", false);
+                  }
+                  
                   break;
 
                 case OPTION_3:
-                  last_item = option_pop_array(arr);
-                  printf("Last item: %d\n", last_item);
+                  if (arr->count > 0)
+                  {
+                      last_item = option_pop_array(arr);
+                      printf(TAB_SIZE "Last item: %d\n\n", last_item);
+                  }
+                  else
+                  {
+                      printf_error("The array is empty\n", false);
+                  }
                   print_array(arr);
                   break;
 
@@ -358,6 +486,8 @@ int main(int argc, char const *argv[])
     }
 
     array_free(arr);
+
+    printf_success("Exiting program", true);
 
     return 0;
 }
