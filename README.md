@@ -11,7 +11,7 @@ The repository contains some exercises implementations and code exploration for 
 For building the exercises, I use the `gcc` compiler with the command:
 
 ```
-$ gcc -o <output_file> <source_file>.c
+$ gcc -o <output_file> <source_file>.c -Wall
 ```
 
 This command compile the `source_file` and output the result to an executable `output_file`.
