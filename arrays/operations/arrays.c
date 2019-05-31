@@ -140,7 +140,6 @@ void print_array(array *arr)
     if (arr)
     {
         int i;
-        char *digits;
         const char *append = repeat_str(CHAR_REPEAT, 11);
         const char *offset = repeat_str(CHAR_REPEAT, 2);
         const char *string = repeat_str(CHAR_REPEAT, 5);
@@ -162,12 +161,16 @@ void print_array(array *arr)
             for (i = 0; i < arr->count; i++)
             {
                 int count = count_digits(arr->items[i]);
-                printf("%s", repeat_str(CHAR_REPEAT, count + 3));
+                const char *__append = repeat_str(CHAR_REPEAT, count + 3);
+                printf("%s", __append);
+                free((char*) __append);
             }
         }
         else
         {
-            printf("%s", repeat_str(CHAR_REPEAT, 4));
+            const char *__append = repeat_str(CHAR_REPEAT, 4);
+            printf("%s", __append);
+            free((char*) __append);
         }
 
         printf("\n" TAB_SIZE "| Elements  | ");
@@ -192,13 +195,22 @@ void print_array(array *arr)
             for (i = 0; i < arr->count; i++)
             {
                 int count = count_digits(arr->items[i]);
-                printf("%s", repeat_str(CHAR_REPEAT, count + 3));
+                const char *__append = repeat_str(CHAR_REPEAT, count + 3);
+                printf("%s", __append);
+                free((char*) __append);
             }
         }
         else
         {
-            printf("%s", repeat_str(CHAR_REPEAT, 4));
+            const char *__append = repeat_str(CHAR_REPEAT, 4);
+            printf("%s", __append);
+            free((char*) __append);
         }
+
+        free((char*) append);
+        free((char*) offset);
+        free((char*) string);
+        free((char*) count_repeat);
 
         printf("\n");
     }
@@ -215,9 +227,20 @@ void array_free(array *arr)
 {
     if (arr)
     {
+        array_reset(arr);
+
         free(arr->items);
         free(arr);
     }
+}
+
+/**
+ * Reset the array to the default state
+ */
+void array_reset(array *arr)
+{
+    arr->count = 0;
+    arr->items = NULL;
 }
 
 /**
@@ -248,7 +271,7 @@ array *option_create_array()
     if (arr)
     {
         // Fill the array with entry values
-        for (index; index < size; index++)
+        for (; index < size; index++)
         {
             printf(TAB_SIZE COLOR_BLUE " => " COLOR_RESET "Enter element ");
             printf(COLOR_YELLOW);
@@ -319,13 +342,15 @@ int array_pop(array *arr)
     {
         int i = arr->count - 1;
         int last = arr->items[i];
-        for (i; i < arr->count - 1; i++)
+        for (;i < arr->count - 1; i++)
         {
             arr->items[i] = arr->items[i + 1];
         }
         arr->count -= 1;
         return last;
     }
+
+    return -1;
 }
 
 /**
