@@ -1,14 +1,16 @@
-# c-exercises
+# C programming exercises
 
-```
-This is a WIP repository
-```
-
-The repository contains some exercises implementations and code exploration for the `c` language.
+The repository contains some exercises implementations and code exploration based on `c`, with the purpose of becoming more familiar with the language.
 
 ## Building
 
-For building the exercises, I use the `gcc` compiler with the command:
+To check memory errors you can use `valgrind` with the command:
+
+```
+$ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
+```
+
+For building the exercises on Linux-based distributions, you can use the `gcc` compiler with the command:
 
 ```
 $ gcc -o <output_file> <source_file>.c -Wall
