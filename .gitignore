@@ -1,0 +1,6 @@
+# Editor specific configuration
+/.vscode
+
+# Build files
+/arrays/operations/arrays
+/arrays/sum-array/sum-array
