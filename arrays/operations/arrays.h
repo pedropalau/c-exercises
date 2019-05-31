@@ -64,6 +64,11 @@ int array_count(array *arr);
 void array_free(array *arr);
 
 /**
+ * Reset the object
+ */
+void array_reset(array *arr);
+
+/**
  * Checks if a value exists in an array
  */
 bool in_array(array *arr, int *item);
