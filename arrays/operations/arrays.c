@@ -147,11 +147,19 @@ void print_array(array *arr)
         const char *string = repeat_str(CHAR_REPEAT, 5);
 
         const char *count_repeat = repeat_str(CHAR_REPEAT, count_digits(arr->count));
+        const char *size_repeat = repeat_str(CHAR_REPEAT, count_digits(arr->size));
 
         printf(TAB_SIZE "%s%s%s\n", append, count_repeat, string);
         printf(TAB_SIZE "| Length    | ");
         printf(arr->count > 0 ? COLOR_YELLOW : COLOR_RED);
         printf("%d", arr->count);
+        printf(COLOR_RESET);
+        printf(" |\n");
+
+        printf(TAB_SIZE "%s%s%s\n", append, size_repeat, string);
+        printf(TAB_SIZE "| Size      | ");
+        printf(arr->size > arr->count ? COLOR_YELLOW : COLOR_RED);
+        printf("%d", arr->size);
         printf(COLOR_RESET);
         printf(" |\n");
 
