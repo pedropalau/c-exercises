@@ -2,5 +2,5 @@
 /.vscode
 
 # Build files
-/arrays/operations/arrays
+/arrays/operations/build
 /arrays/sum-array/sum-array
