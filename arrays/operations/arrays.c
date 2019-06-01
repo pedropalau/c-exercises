@@ -7,6 +7,8 @@
 
 #include "arrays.h"
 
+#define ARRAY_SIZE      10
+
 #define COLOR_GREEN     "\x1b[32m"
 #define COLOR_YELLOW    "\x1b[33m"
 #define COLOR_RED       "\x1b[31m"
@@ -78,7 +80,7 @@ char *repeat_str(const char *string, int size)
 int count_digits(int number)
 {
     int count = 0;
-    int n = number;
+    int n = number ? number : 0;
 
     while (n > 0)
     {
@@ -288,14 +290,15 @@ array *option_create_array()
     return arr;
 }
 
-array *array_create(int size)
+array *array_create(int count)
 {
     array *arr = (array *) malloc(sizeof(array));
 
     if (arr)
     {
-        arr->count = size;
-        arr->items = malloc(size * sizeof(int));
+        arr->size = ARRAY_SIZE;
+        arr->count = count;
+        arr->items = (int *) calloc(ARRAY_SIZE, sizeof(int));
     }
 
     return arr;
@@ -317,12 +320,13 @@ void option_push_array(array *arr)
 
 void array_push(array *arr, int item)
 {
-    arr->items[arr->count] = item;
-    arr->count++;
+    array_set(arr, item, arr->count);
+    arr->count += 1;
 }
 
 void array_set(array *arr, int item, int index)
 {
+    // @TODO resize the array if required
     arr->items[index] = item;
 }
 
