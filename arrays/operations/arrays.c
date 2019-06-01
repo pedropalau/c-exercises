@@ -162,8 +162,7 @@ void print_array(array *arr)
         {
             for (i = 0; i < arr->count; i++)
             {
-                int count = count_digits(arr->items[i]);
-                const char *__append = repeat_str(CHAR_REPEAT, count + 3);
+                const char *__append = repeat_str(CHAR_REPEAT, count_digits(arr->items[i]) + 3);
                 printf("%s", __append);
                 free((char*) __append);
             }
