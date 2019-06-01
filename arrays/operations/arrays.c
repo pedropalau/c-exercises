@@ -338,7 +338,6 @@ void array_push(array *arr, int item)
 
 void array_set(array *arr, int item, int index)
 {
-    // @TODO resize the array if required
     arr->items[index] = item;
 }
 
@@ -452,15 +451,8 @@ int main(int argc, char const *argv[])
             switch (selected)
             {
                 case OPTION_2:
-                    if (arr->count > 0)
-                    {
-                        option_push_array(arr);
-                        print_array(arr);
-                    }
-                    else
-                    {
-                        printf_error("Please, create an array", false);
-                    }
+                    option_push_array(arr);
+                    print_array(arr);
                     break;
 
                 case OPTION_3:
