@@ -34,6 +34,11 @@ void array_push(array *arr, int item);
 void array_set(array *arr, int item, int index);
 
 /**
+ * Resize the array
+ */
+void array_resize(array *arr);
+
+/**
  * Pop the element of the end of array
  */
 int array_pop(array *arr);

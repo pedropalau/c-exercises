@@ -327,6 +327,11 @@ void option_push_array(array *arr)
 
 void array_push(array *arr, int item)
 {
+    if (arr->size <= arr->count)
+    {
+        array_resize(arr);
+    }
+
     array_set(arr, item, arr->count);
     arr->count += 1;
 }
@@ -335,6 +340,14 @@ void array_set(array *arr, int item, int index)
 {
     // @TODO resize the array if required
     arr->items[index] = item;
+}
+
+void array_resize(array *arr)
+{
+    int size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
+    // Attempts to resize the memory block reserved for items
+    arr->items = realloc(arr->items, size_for_resize);
+    arr->size *= ARRAY_SIZE;
 }
 
 /**
