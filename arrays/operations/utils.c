@@ -1,6 +1,12 @@
+#ifndef C_ARRAY_UTILS
+
+#define C_ARRAY_UTILS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "utils.h"
 
 /**
  * Helper function for repeating a character
@@ -45,3 +51,5 @@ int count_digits(int number)
 
     return number == 0 ? 1 : count;
 }
+
+#endif
