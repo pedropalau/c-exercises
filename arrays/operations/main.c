@@ -13,29 +13,6 @@
 #include "utils.c"
 
 /**
- * Delete the array and free the used memory
- */
-void array_free(array *arr)
-{
-    if (arr)
-    {
-        array_reset(arr);
-
-        free(arr->items);
-        free(arr);
-    }
-}
-
-/**
- * Reset the array to the default state
- */
-void array_reset(array *arr)
-{
-    arr->count = 0;
-    arr->items = NULL;
-}
-
-/**
  * Option callback: create an array with an specific size
  */
 array *option_create_array()

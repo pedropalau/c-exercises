@@ -77,4 +77,27 @@ int array_pop(array *arr)
     return -1;
 }
 
+/**
+ * Delete the array and free the used memory
+ */
+void array_free(array *arr)
+{
+    if (arr)
+    {
+        array_reset(arr);
+
+        free(arr->items);
+        free(arr);
+    }
+}
+
+/**
+ * Reset the array to the default state
+ */
+void array_reset(array *arr)
+{
+    arr->count = 0;
+    arr->items = NULL;
+}
+
 #endif
