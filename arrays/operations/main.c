@@ -88,9 +88,11 @@ int option_pop_array(array *arr)
 /**
  * Remove the first element from the array
  */
-void option_shift_array(array *arr)
+int option_shift_array(array *arr)
 {
-    printf("Option 4\n");
+    printf_title("Shift", OPTION_SHIFT);
+    int first = array_shift(arr);
+    return first;
 }
 
 /**
@@ -134,7 +136,7 @@ int main(int argc, char const *argv[])
         MAX_OPTION = OPTION_EXIT,
         EXIT_OPTION = MAX_OPTION,
         selected = MIN_OPTION - 1,
-        last_item;
+        last_item, first_item;
 
     array *arr = array_create(0);
 
@@ -192,7 +194,16 @@ int main(int argc, char const *argv[])
                     break;
 
                 case OPTION_SHIFT:
-                    option_shift_array(arr);
+                    if (arr->count > 0)
+                    {
+                        first_item = option_shift_array(arr);
+                        printf_tabbed("First item: %d\n\n", first_item);
+                    }
+                    else
+                    {
+                        printf_error("The array is empty\n", false);
+                    }
+                    print_array(arr);
                     break;
 
                 case OPTION_INSERT:

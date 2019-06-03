@@ -66,12 +66,32 @@ int array_pop(array *arr)
     {
         int i = arr->count - 1;
         int last = arr->items[i];
-        for (;i < arr->count - 1; i++)
+        for (; i < arr->count - 1; i++)
         {
             arr->items[i] = arr->items[i + 1];
         }
         arr->count -= 1;
         return last;
+    }
+
+    return -1;
+}
+
+/**
+ * Shift an element off the beginning of array
+ */
+int array_shift(array *arr)
+{
+    if (arr->count > 0)
+    {
+        int i = 0;
+        int first = arr->items[i];
+        for (; i < arr->count; i++)
+        {
+            arr->items[i] = arr->items[i + 1];
+        }
+        arr->count -= 1;
+        return first;
     }
 
     return -1;
