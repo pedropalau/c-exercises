@@ -39,25 +39,6 @@ void array_push(array *arr, int item)
 }
 
 /**
- * Set the element on the specific inex
- */
-void array_set(array *arr, int item, int index)
-{
-    arr->items[index] = item;
-}
-
-/**
- * Resize the array
- */
-void array_resize(array *arr)
-{
-    int size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
-    // Attempts to resize the memory block reserved for items
-    arr->items = realloc(arr->items, size_for_resize);
-    arr->size *= ARRAY_SIZE;
-}
-
-/**
  * Pop the element of the end of array
  */
 int array_pop(array *arr)
@@ -95,6 +76,51 @@ int array_shift(array *arr)
     }
 
     return -1;
+}
+
+/**
+ * Insert a new item in the array before position `index`.
+ */
+void array_insert(array *arr, int item, int index)
+{
+    if (arr->size <= arr->count)
+    {
+        array_resize(arr);
+    }
+
+    if (index >= arr->count)
+    {
+        array_push(arr, item);
+    }
+    else
+    {
+        int i = arr->count;
+        for (; i >= index; i--)
+        {
+            array_set(arr, arr->items[i - 1], i);
+        }
+        array_set(arr, item, index - 1);
+        arr->count += 1;
+    }
+}
+
+/**
+ * Set the element on the specific inex
+ */
+void array_set(array *arr, int item, int index)
+{
+    arr->items[index] = item;
+}
+
+/**
+ * Resize the array
+ */
+void array_resize(array *arr)
+{
+    int size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
+    // Attempts to resize the memory block reserved for items
+    arr->items = realloc(arr->items, size_for_resize);
+    arr->size *= ARRAY_SIZE;
 }
 
 /**

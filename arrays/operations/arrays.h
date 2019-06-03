@@ -53,9 +53,9 @@ int array_pop(array *arr);
 int array_shift(array *arr);
 
 /**
- * Insert a new item in the array before position `i`. 
+ * Insert a new item in the array before position `index`. 
  */
-void array_insert(array *arr, int *item, int i);
+void array_insert(array *arr, int item, int index);
 
 /**
  * Searches the array for a given value and returns 

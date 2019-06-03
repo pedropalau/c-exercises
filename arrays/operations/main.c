@@ -98,9 +98,28 @@ int option_shift_array(array *arr)
 /**
  * Insert an element onto the array
  */
-void option_insert_array()
+void option_insert_array(array *arr)
 {
-    printf("Option 5\n");
+    int number, position = -1;
+
+    printf_title("Insert", OPTION_INSERT);
+
+    printf_tabbed("Type element to insert: ");
+    scanf("%d", &number);
+
+    while (position < 0 || position > arr->count + 1)
+    {
+        printf_tabbed("Type the position where to insert: ");
+        scanf("%d", &position);
+        if (position < 0 || position > arr->count + 1)
+        {
+            printf_error("Please insert a position between 0 to [total]", false);
+        }
+    }
+
+    print_new_line();
+
+    array_insert(arr, number, position);
 }
 
 /**
@@ -207,7 +226,8 @@ int main(int argc, char const *argv[])
                     break;
 
                 case OPTION_INSERT:
-                    option_insert_array();
+                    option_insert_array(arr);
+                    print_array(arr);
                     break;
 
                 case OPTION_SEARCH:
