@@ -1,6 +1,6 @@
-#ifndef _ARRAY_HEADER
+#ifndef C_ARRAY_H
 
-#define _ARRAY_HEADER
+#define C_ARRAY_H
 
 #include <stdbool.h>
 

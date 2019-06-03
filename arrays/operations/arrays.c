@@ -1,3 +1,7 @@
+#ifndef C_ARRAY
+
+#define C_ARRAY
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -123,3 +127,5 @@ int array_pop(array *arr)
 
     return -1;
 }
+
+#endif
