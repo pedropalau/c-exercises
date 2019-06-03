@@ -2,6 +2,8 @@
 
 #define C_ARRAY_EDITOR
 
+#include <stdarg.h>
+
 #include "../../constants.h"
 
 #include "editor.h"
@@ -13,25 +15,25 @@
  */
 void print_options()
 {
-    printf("\n");
+    print_new_line();
 
     print_color_yellow();
-    printf(TAB_SIZE "Options:\n\n");
+    printf_tabbed("Options:\n\n");
     print_color_reset();
 
-    printf("%s[ %d ] Create\n",  TAB_SIZE, OPTION_1);
-    printf("%s[ %d ] Push\n",    TAB_SIZE, OPTION_2);
-    printf("%s[ %d ] Pop\n",     TAB_SIZE, OPTION_3);
-    printf("%s[ %d ] Shift\n",   TAB_SIZE, OPTION_4);
-    printf("%s[ %d ] Insert\n",  TAB_SIZE, OPTION_5);
-    printf("%s[ %d ] Search\n",  TAB_SIZE, OPTION_6);
-    printf("%s[ %d ] Product\n", TAB_SIZE, OPTION_7);
-    printf("%s[ %d ] Count\n",   TAB_SIZE, OPTION_8);
-    printf("%s[ %d ] Exit\n",    TAB_SIZE, OPTION_9);
+    printf_tabbed("[ %d ] Create\n",  OPTION_CREATE);
+    printf_tabbed("[ %d ] Push\n",    OPTION_PUSH);
+    printf_tabbed("[ %d ] Pop\n",     OPTION_POP);
+    printf_tabbed("[ %d ] Shift\n",   OPTION_SHIFT);
+    printf_tabbed("[ %d ] Insert\n",  OPTION_INSERT);
+    printf_tabbed("[ %d ] Search\n",  OPTION_SEARCH);
+    printf_tabbed("[ %d ] Product\n", OPTION_PRODUCT);
+    printf_tabbed("[ %d ] Count\n",   OPTION_COUNT);
+    printf_tabbed("[ %d ] Exit\n",    OPTION_EXIT);
 
-    printf("\n");
+    print_new_line();
 
-    printf(TAB_SIZE "Select an option: ");
+    printf_tabbed("Select an option: ");
 }
 
 /**
@@ -40,7 +42,7 @@ void print_options()
 void printf_title(char *message, int option)
 {   
     print_color_green();
-    printf(TAB_SIZE "%d. %s", option, message);
+    printf_tabbed("%d. %s", option, message);
     print_color_reset();
     printf("\n\n");
 }
@@ -52,13 +54,13 @@ void printf_error(char *message, bool space)
 {
     if (space)
     {
-        printf("\n");
+        print_new_line();
     }
     
     print_color_red();
-    printf(TAB_SIZE "Error: %s", message);
+    printf_tabbed("Error: %s", message);
     print_color_reset();
-    printf("\n");
+    print_new_line();
 }
 
 /**
@@ -68,13 +70,25 @@ void printf_success(char *message, bool space)
 {
     if (space)
     {
-        printf("\n");
+        print_new_line();
     }
 
     print_color_green();
-    printf(TAB_SIZE "Success: %s", message);
+    printf_tabbed("Success: %s", message);
     print_color_reset();
-    printf("\n");
+    print_new_line();
+}
+
+/**
+ * Print the specified text with tab space
+ */
+void printf_tabbed(const char *text, ...)
+{
+    va_list args;
+    va_start(args, text);
+    print_space();
+    vprintf(text, args);
+    va_end(args);
 }
 
 /**
@@ -100,8 +114,8 @@ void print_array(array *arr)
         const char *count_repeat = repeat_str(CHAR_REPEAT, count_digits(arr->count));
         const char *size_repeat = repeat_str(CHAR_REPEAT, count_digits(arr->size));
 
-        printf(TAB_SIZE "%s%s%s\n", append, count_repeat, string);
-        printf(TAB_SIZE "| Length    | ");
+        printf_tabbed("%s%s%s\n", append, count_repeat, string);
+        printf_tabbed("| Length    | ");
         if (arr->count > 0)
         {
             print_color_yellow();
@@ -114,8 +128,8 @@ void print_array(array *arr)
         print_color_reset();
         printf(" |\n");
 
-        printf(TAB_SIZE "%s%s%s\n", append, size_repeat, string);
-        printf(TAB_SIZE "| Size      | ");
+        printf_tabbed("%s%s%s\n", append, size_repeat, string);
+        printf_tabbed("| Size      | ");
         if (arr->size > arr->count)
         {
             print_color_yellow();
@@ -128,7 +142,7 @@ void print_array(array *arr)
         print_color_reset();
         printf(" |\n");
 
-        printf(TAB_SIZE "%s%s", append, offset);
+        printf_tabbed("%s%s", append, offset);
 
         // Print the repeater char based on the digits
         if (arr->count > 0)
@@ -147,14 +161,15 @@ void print_array(array *arr)
             free((char*) __append);
         }
 
-        printf("\n" TAB_SIZE "| Elements  | ");
+        print_new_line();
+        printf_tabbed("| Elements  | ");
 
         if (arr->count == 0)
         {
             print_color_red();
             printf("x");
             print_color_reset();
-            printf( " |");
+            printf(" |");
         }
 
         for (i = 0; i < arr->count; i++)
@@ -165,7 +180,8 @@ void print_array(array *arr)
             printf(" | ");
         }
 
-        printf("\n" TAB_SIZE "%s%s", append, offset);
+        print_new_line();
+        printf_tabbed("%s%s", append, offset);
 
         if (arr->count > 0)
         {
@@ -189,12 +205,36 @@ void print_array(array *arr)
         free((char*) string);
         free((char*) count_repeat);
 
-        printf("\n");
+        print_new_line();
     }
     else
     {
         printf_error("Invalid array", true);
     }
+}
+
+/**
+ * Print a new line on the terminal
+ */
+void print_new_line()
+{
+    printf("%s", NEW_LINE);
+}
+
+/**
+ * Do an `space` printing on terminal
+ */
+void print_space()
+{
+    printf("%s", TAB_SIZE);
+}
+
+/**
+ * Simulate an `hr` printing on the terminal
+ */
+void print_hr()
+{
+    printf("----------------------------------");
 }
 
 #endif

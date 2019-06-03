@@ -19,9 +19,9 @@ array *option_create_array()
 {
     int size, element, index = 0;
 
-    printf_title("Create array", OPTION_1);
+    printf_title("Create array", OPTION_CREATE);
 
-    printf(TAB_SIZE "Insert the size of the array (value between 1 - 10): ");
+    printf_tabbed("Insert the size of the array (value between 1 - 10): ");
 
     scanf("%d", &size);
 
@@ -30,7 +30,7 @@ array *option_create_array()
         while (size < ARRAY_MIN_SIZE || size > ARRAY_MAX_SIZE)
         {
             printf_error("Invalid size, please enter again", false);
-            printf(TAB_SIZE "Insert the size of the array (value between 1 - 10): ");
+            printf_tabbed("Insert the size of the array (value between 1 - 10): ");
             scanf("%d", &size);
         }
     }
@@ -42,7 +42,7 @@ array *option_create_array()
         // Fill the array with entry values
         for (; index < size; index++)
         {
-            printf(TAB_SIZE);
+            print_space();
             print_color_blue();
             printf(" => ");
             print_color_reset();
@@ -55,7 +55,7 @@ array *option_create_array()
         }
 
         printf_success("Array created", true);
-        printf("\n");
+        print_new_line();
     }
 
     return arr;
@@ -68,10 +68,10 @@ void option_push_array(array *arr)
 {
     int number;
 
-    printf_title("Push", OPTION_2);
-    printf(TAB_SIZE "Type the element to push: ");
+    printf_title("Push", OPTION_PUSH);
+    printf_tabbed("Type the element to push: ");
     scanf("%d", &number);
-    printf("\n");
+    print_new_line();
     array_push(arr, number);
 }
 
@@ -80,7 +80,7 @@ void option_push_array(array *arr)
  */
 int option_pop_array(array *arr)
 {
-    printf_title("Pop", OPTION_3);
+    printf_title("Pop", OPTION_POP);
     int last = array_pop(arr);
     return last;
 }
@@ -130,31 +130,31 @@ void option_count_array()
  */
 int main(int argc, char const *argv[])
 {
-    int MIN_OPTION = OPTION_1,
-        MAX_OPTION = OPTION_9,
+    int MIN_OPTION = OPTION_CREATE,
+        MAX_OPTION = OPTION_EXIT,
         EXIT_OPTION = MAX_OPTION,
         selected = MIN_OPTION - 1,
         last_item;
 
     array *arr = array_create(0);
 
-    printf(TAB_SIZE);
+    print_space();
     print_color_green();
-    printf("----------------------------------");
+    print_hr();
     print_color_reset();
-    printf("\n");
+    print_new_line();
 
-    printf(TAB_SIZE);
+    print_space();
     print_color_green();
     printf("|       BASIC ARRAY OPERATIONS   |");
     print_color_reset();
-    printf("\n");
+    print_new_line();
 
-    printf(TAB_SIZE);
+    print_space();
     print_color_green();
-    printf("----------------------------------");
+    print_hr();
     print_color_reset();
-    printf("\n");
+    print_new_line();
 
     print_options();
 
@@ -169,20 +169,20 @@ int main(int argc, char const *argv[])
 
         if (selected >= MIN_OPTION && selected <= MAX_OPTION && selected != EXIT_OPTION)
         {
-            printf("\n");
+            print_new_line();
 
             switch (selected)
             {
-                case OPTION_2:
+                case OPTION_PUSH:
                     option_push_array(arr);
                     print_array(arr);
                     break;
 
-                case OPTION_3:
+                case OPTION_POP:
                     if (arr->count > 0)
                     {
                         last_item = option_pop_array(arr);
-                        printf(TAB_SIZE "Last item: %d\n\n", last_item);
+                        printf_tabbed("Last item: %d\n\n", last_item);
                     }
                     else
                     {
@@ -191,23 +191,23 @@ int main(int argc, char const *argv[])
                     print_array(arr);
                     break;
 
-                case OPTION_4:
+                case OPTION_SHIFT:
                     option_shift_array(arr);
                     break;
 
-                case OPTION_5:
+                case OPTION_INSERT:
                     option_insert_array();
                     break;
 
-                case OPTION_6:
+                case OPTION_SEARCH:
                     option_search_array();
                     break;
 
-                case OPTION_7:
+                case OPTION_PRODUCT:
                     option_product_array();
                     break;
 
-                case OPTION_8:
+                case OPTION_COUNT:
                     option_count_array();
                     break;
 
