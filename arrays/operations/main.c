@@ -8,8 +8,6 @@
 #include "../../constants.h"
 #include "../../utils/colors.c"
 
-#include "../array-constants.h"
-
 #include "arrays.c"
 #include "editor.c"
 #include "utils.c"
@@ -81,20 +79,6 @@ array *option_create_array()
 
         printf_success("Array created", true);
         printf("\n");
-    }
-
-    return arr;
-}
-
-array *array_create(int count)
-{
-    array *arr = (array *) malloc(sizeof(array));
-
-    if (arr)
-    {
-        arr->size = ARRAY_SIZE;
-        arr->count = count;
-        arr->items = (int *) calloc(ARRAY_SIZE, sizeof(int));
     }
 
     return arr;
