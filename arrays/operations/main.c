@@ -7,17 +7,12 @@
 
 #include "utils.c"
 
+#include "../../constants.h"
+#include "../../utils/colors.c"
+
 #include "arrays.h"
 #include "arrays.c"
-
-#define COLOR_GREEN     "\x1b[32m"
-#define COLOR_YELLOW    "\x1b[33m"
-#define COLOR_RED       "\x1b[31m"
-#define COLOR_BLUE      "\x1b[34m"
-#define COLOR_RESET     "\x1b[0m"
-
-#define TAB_SIZE        "  "
-#define CHAR_REPEAT     "-"
+#include "../array-constants.h"
 
 #define OPTION_1        1
 #define OPTION_2        2
@@ -29,16 +24,17 @@
 #define OPTION_8        8
 #define OPTION_9        9
 
-#define ARRAY_MIN_SIZE  1
-#define ARRAY_MAX_SIZE  10
-
 /**
  * Print the program options 
  */
 void print_options()
 {
     printf("\n");
-    printf(TAB_SIZE COLOR_YELLOW "Options:\n\n" COLOR_RESET);
+
+    print_color_yellow();
+    printf(TAB_SIZE "Options:\n\n");
+    print_color_reset();
+
     printf("%s[ %d ] Create\n",  TAB_SIZE, OPTION_1);
     printf("%s[ %d ] Push\n",    TAB_SIZE, OPTION_2);
     printf("%s[ %d ] Pop\n",     TAB_SIZE, OPTION_3);
@@ -48,7 +44,9 @@ void print_options()
     printf("%s[ %d ] Product\n", TAB_SIZE, OPTION_7);
     printf("%s[ %d ] Count\n",   TAB_SIZE, OPTION_8);
     printf("%s[ %d ] Exit\n",    TAB_SIZE, OPTION_9);
+
     printf("\n");
+
     printf(TAB_SIZE "Select an option: ");
 }
 
@@ -57,9 +55,9 @@ void print_options()
  */
 void printf_title(char *message, int option)
 {   
-    printf(COLOR_GREEN);
+    print_color_green();
     printf(TAB_SIZE "%d. %s", option, message);
-    printf(COLOR_RESET);
+    print_color_reset();
     printf("\n\n");
 }
 
@@ -72,7 +70,11 @@ void printf_error(char *message, bool space)
     {
         printf("\n");
     }
-    printf(TAB_SIZE COLOR_RED "Error: %s" COLOR_RESET "\n", message);
+    
+    print_color_red();
+    printf(TAB_SIZE "Error: %s", message);
+    print_color_reset();
+    printf("\n");
 }
 
 /**
@@ -84,7 +86,11 @@ void printf_success(char *message, bool space)
     {
         printf("\n");
     }
-    printf(TAB_SIZE COLOR_GREEN "Success: %s" COLOR_RESET "\n", message);
+
+    print_color_green();
+    printf(TAB_SIZE "Success: %s", message);
+    print_color_reset();
+    printf("\n");
 }
 
 /**
@@ -112,16 +118,30 @@ void print_array(array *arr)
 
         printf(TAB_SIZE "%s%s%s\n", append, count_repeat, string);
         printf(TAB_SIZE "| Length    | ");
-        printf(arr->count > 0 ? COLOR_YELLOW : COLOR_RED);
+        if (arr->count > 0)
+        {
+            print_color_yellow();
+        }
+        else
+        {
+            print_color_red();
+        }
         printf("%d", arr->count);
-        printf(COLOR_RESET);
+        print_color_reset();
         printf(" |\n");
 
         printf(TAB_SIZE "%s%s%s\n", append, size_repeat, string);
         printf(TAB_SIZE "| Size      | ");
-        printf(arr->size > arr->count ? COLOR_YELLOW : COLOR_RED);
+        if (arr->size > arr->count)
+        {
+            print_color_yellow();
+        }
+        else
+        {
+            print_color_red();
+        }
         printf("%d", arr->size);
-        printf(COLOR_RESET);
+        print_color_reset();
         printf(" |\n");
 
         printf(TAB_SIZE "%s%s", append, offset);
@@ -147,14 +167,17 @@ void print_array(array *arr)
 
         if (arr->count == 0)
         {
-            printf(COLOR_RED "x" COLOR_RESET " |");
+            print_color_red();
+            printf("x");
+            print_color_reset();
+            printf( " |");
         }
 
         for (i = 0; i < arr->count; i++)
         {
-            printf(COLOR_YELLOW);
+            print_color_yellow();
             printf("%d", arr->items[i]);
-            printf(COLOR_RESET);
+            print_color_reset();
             printf(" | ");
         }
 
@@ -243,10 +266,14 @@ array *option_create_array()
         // Fill the array with entry values
         for (; index < size; index++)
         {
-            printf(TAB_SIZE COLOR_BLUE " => " COLOR_RESET "Enter element ");
-            printf(COLOR_YELLOW);
+            printf(TAB_SIZE);
+            print_color_blue();
+            printf(" => ");
+            print_color_reset();
+            printf("Enter element ");
+            print_color_yellow();
             printf("#%d: ", index + 1);
-            printf(COLOR_RESET);
+            print_color_reset();
             scanf("%d", &element);
             array_set(arr, element, index);
         }
@@ -349,9 +376,23 @@ int main(int argc, char const *argv[])
 
     array *arr = array_create(0);
 
-    printf(TAB_SIZE COLOR_GREEN "----------------------------------" COLOR_RESET "\n");
-    printf(TAB_SIZE COLOR_GREEN "|       BASIC ARRAY OPERATIONS   |" COLOR_RESET "\n");
-    printf(TAB_SIZE COLOR_GREEN "----------------------------------" COLOR_RESET "\n");
+    printf(TAB_SIZE);
+    print_color_green();
+    printf("----------------------------------");
+    print_color_reset();
+    printf("\n");
+
+    printf(TAB_SIZE);
+    print_color_green();
+    printf("|       BASIC ARRAY OPERATIONS   |");
+    print_color_reset();
+    printf("\n");
+
+    printf(TAB_SIZE);
+    print_color_green();
+    printf("----------------------------------");
+    print_color_reset();
+    printf("\n");
 
     print_options();
 
