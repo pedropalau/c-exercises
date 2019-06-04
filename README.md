@@ -25,3 +25,8 @@ For executing the binary file, you can use the command:
 ```
 $ ./<output_file>
 ```
+
+## TBD
+
+* [ ] Implements tests
+* [ ] Use Makefile for automatic code checking and testin
