@@ -69,30 +69,57 @@ void option_push_array(array *arr)
     int number;
 
     printf_title("Push", OPTION_PUSH);
+
     printf_tabbed("Type the element to push: ");
     scanf("%d", &number);
+
     print_new_line();
+
     array_push(arr, number);
+
+    print_array(arr);
 }
 
 /**
  * Pop an element from end of the array
  */
-int option_pop_array(array *arr)
+void option_pop_array(array *arr)
 {
-    printf_title("Pop", OPTION_POP);
-    int last = array_pop(arr);
-    return last;
+    int last;
+
+    printf_title("Pop", OPTION_SHIFT);
+
+    if (arr->count > 0)
+    {
+        last = array_pop(arr);
+        printf_tabbed("Last item: %d\n\n", last);
+        print_array(arr);
+    }
+    else
+    {
+        printf_error("The array is empty\n", false);
+    }
 }
 
 /**
  * Remove the first element from the array
  */
-int option_shift_array(array *arr)
+void option_shift_array(array *arr)
 {
+    int first;
+
     printf_title("Shift", OPTION_SHIFT);
-    int first = array_shift(arr);
-    return first;
+
+    if (arr->count > 0)
+    {
+        first = array_shift(arr);
+        printf_tabbed("First item: %d\n\n", first);
+        print_array(arr);
+    }
+    else
+    {
+        printf_error("The array is empty\n", false);
+    }
 }
 
 /**
@@ -120,45 +147,70 @@ void option_insert_array(array *arr)
     print_new_line();
 
     array_insert(arr, number, position);
+    
+    print_array(arr);
 }
 
 /**
  * Search an element on the array
  */
-void option_search_array()
+void option_search_array(array *arr)
 {
-    printf("Option 6\n");
+    printf_title("Search", OPTION_SEARCH);
 }
 
 /**
  * Calculate the product of elements of the array
  */
-void option_product_array()
+void option_product_array(array *arr)
 {
-    printf("Option 7\n");
+    printf_title("Product", OPTION_PRODUCT);
 }
 
 /**
  * Count all elements from the array
  */
-void option_count_array()
+void option_count_array(array *arr)
 {
-    printf("Option 8\n");
+    printf_title("Count", OPTION_COUNT);
 }
 
 /**
- * The main program
+ * Helper function to validate the selected option
  */
-int main(int argc, char const *argv[])
+bool option_validate(int option)
 {
-    int MIN_OPTION = OPTION_CREATE,
-        MAX_OPTION = OPTION_EXIT,
-        EXIT_OPTION = MAX_OPTION,
-        selected = MIN_OPTION - 1,
-        last_item, first_item;
+    int size = 9, i = 0;
 
-    array *arr = array_create(0);
+    int options[] = {
+        OPTION_CREATE,
+        OPTION_PUSH,
+        OPTION_POP,
+        OPTION_SHIFT,
+        OPTION_INSERT,
+        OPTION_SEARCH,
+        OPTION_PRODUCT,
+        OPTION_COUNT,
+        OPTION_EXIT
+    };
 
+    for (; i < size; i++)
+    {
+        if (options[i] == option)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Helper function for printing the header 
+ * of the main program
+ */
+void print_main_header()
+{
     print_space();
     print_color_green();
     print_hr();
@@ -176,84 +228,82 @@ int main(int argc, char const *argv[])
     print_hr();
     print_color_reset();
     print_new_line();
+}
 
-    print_options();
-
-    scanf("%d", &selected);
-
-    while (selected != EXIT_OPTION)
+/**
+ * Helper function that process the array
+ * depending of the selected option
+ */
+void process_option(array *arr, int option)
+{
+    switch (option)
     {
-        if (selected < MIN_OPTION || selected > MAX_OPTION)
+        case OPTION_PUSH:
+            option_push_array(arr);
+            break;
+
+        case OPTION_POP:
+            option_pop_array(arr);
+            break;
+
+        case OPTION_SHIFT:
+            option_shift_array(arr);
+            break;
+
+        case OPTION_INSERT:
+            option_insert_array(arr);
+            break;
+
+        case OPTION_SEARCH:
+            option_search_array(arr);
+            break;
+
+        case OPTION_PRODUCT:
+            option_product_array(arr);
+            break;
+
+        case OPTION_COUNT:
+            option_count_array(arr);
+            break;
+
+        default:
+            arr = option_create_array();
+            print_array(arr);
+            break;
+    }
+}
+
+/**
+ * The main program
+ */
+int main(int argc, char const *argv[])
+{
+    int selected;
+    array *arr = array_create(0);
+
+    print_main_header();
+
+    do
+    {
+        print_options();
+
+        scanf("%d", &selected);
+
+        if (option_validate(selected) == false)
         {
             print_options_error();
         }
-
-        if (selected >= MIN_OPTION && selected <= MAX_OPTION && selected != EXIT_OPTION)
+        else if (selected != OPTION_EXIT)
         {
             print_new_line();
 
-            switch (selected)
-            {
-                case OPTION_PUSH:
-                    option_push_array(arr);
-                    print_array(arr);
-                    break;
-
-                case OPTION_POP:
-                    if (arr->count > 0)
-                    {
-                        last_item = option_pop_array(arr);
-                        printf_tabbed("Last item: %d\n\n", last_item);
-                    }
-                    else
-                    {
-                        printf_error("The array is empty\n", false);
-                    }
-                    print_array(arr);
-                    break;
-
-                case OPTION_SHIFT:
-                    if (arr->count > 0)
-                    {
-                        first_item = option_shift_array(arr);
-                        printf_tabbed("First item: %d\n\n", first_item);
-                    }
-                    else
-                    {
-                        printf_error("The array is empty\n", false);
-                    }
-                    print_array(arr);
-                    break;
-
-                case OPTION_INSERT:
-                    option_insert_array(arr);
-                    print_array(arr);
-                    break;
-
-                case OPTION_SEARCH:
-                    option_search_array();
-                    break;
-
-                case OPTION_PRODUCT:
-                    option_product_array();
-                    break;
-
-                case OPTION_COUNT:
-                    option_count_array();
-                    break;
-
-                default:
-                    arr = option_create_array();
-                    print_array(arr);
-                    break;
-            }
+            process_option(arr, selected);
         }
-
-        print_options();
-        scanf("%d", &selected);
     }
+    while (selected != OPTION_EXIT);
 
     array_free(arr);
+
     printf_success("Exiting program", true);
 
     return 0;
