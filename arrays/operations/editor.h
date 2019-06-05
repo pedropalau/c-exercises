@@ -25,7 +25,7 @@ void print_options();
 void printf_title(char *message, int option);
 
 /**
- * Print an error 
+ * Print an error
  */
 void printf_error(char *message, bool space);
 

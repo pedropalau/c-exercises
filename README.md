@@ -4,19 +4,25 @@ This repository contains some exercises implementations and code exploration bas
 
 ## Building
 
-To check memory errors you can use `valgrind` with the command:
-
-```
-$ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
-```
-
 For building the exercises on Linux-based distributions, you can use the `gcc` compiler with the command:
 
 ```
 $ gcc -o <output_file> <source_file>.c -Wall
 ```
 
+Alternative, you cand build the exercises using `clang` compiler:
+
+```
+$ clang <source_file> -o <outpue_file>
+```
+
 This command compile the `source_file` and output the result to an executable `output_file`.
+
+To check memory errors you can use `valgrind` with the command:
+
+```
+$ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
+```
 
 ## Executing
 
