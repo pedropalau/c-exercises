@@ -64,7 +64,9 @@ AllowShortIfStatementsOnASingleLine: true
 # If true, while (true) continue; can be put on a single line.
 AllowShortLoopsOnASingleLine: true
 
-# The function definition return type breaking style to use. This option is deprecated and is retained for backwards compatibility.
+# Deprecated
+# The function definition return type breaking style to use.
+# This option is deprecated and is retained for backwards compatibility.
 AlwaysBreakAfterDefinitionReturnType: None
 
 # The function declaration return type breaking style to use.
@@ -76,10 +78,12 @@ AlwaysBreakBeforeMultilineStrings: false
 # The template declaration breaking style to use
 AlwaysBreakTemplateDeclarations: false
 
-# If false, a function call’s arguments will either be all on the same line or will have one line each.
+# If false, a function call’s arguments will either
+# be all on the same line or will have one line each.
 BinPackArguments: true
 
-# If false, a function declaration’s or function definition’s parameters will either all be on the same line or will have one line each.
+# If false, a function declaration’s or function definition’s
+# parameters will either all be on the same line or will have one line each.
 BinPackParameters: true
 
 # Control of individual brace wrapping cases.
@@ -119,7 +123,8 @@ BreakBeforeTernaryOperators: true
 # Always break constructor initializers before commas and align the commas with the colon.
 BreakConstructorInitializersBeforeComma: false
 
-# A regular expression that describes comments with special meaning, which should not be split into lines or otherwise changed.
+# A regular expression that describes comments with special meaning, 
+# which should not be split into lines or otherwise changed.
 CommentPragmas: '^ IWYU pragma:'
 
 # If the constructor initializers don’t fit on a line, put each initializer on its own line.
