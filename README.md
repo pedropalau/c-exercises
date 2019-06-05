@@ -18,18 +18,18 @@ $ clang <source_file> -o <outpue_file>
 
 This command compile the `source_file` and output the result to an executable `output_file`.
 
-To check memory errors you can use `valgrind` with the command:
-
-```
-$ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
-```
-
 ## Executing
 
 For executing the binary file, you can use the command:
 
 ```
 $ ./<output_file>
+```
+
+To check memory errors you can use `valgrind` with the command:
+
+```
+$ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
 ```
 
 ## TBD
