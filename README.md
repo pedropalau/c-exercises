@@ -1,6 +1,6 @@
 # C programming exercises
 
-The repository contains some exercises implementations and code exploration based on `c`, with the purpose of becoming more familiar with the language.
+This repository contains some exercises implementations and code exploration based on `c`, with the purpose of becoming more familiar with the language.
 
 ## Building
 
