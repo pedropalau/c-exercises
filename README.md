@@ -36,4 +36,4 @@ $ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=y
 
 * [ ] Implements tests
 * [x] Configure clang-format for code styling
-* [ ] Use Makefile for automatic code checking and testing
+* [x] Use Makefile for automatic code checking and testing
