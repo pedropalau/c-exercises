@@ -20,7 +20,11 @@ CLANG_FORMAT = clang-format
 CLANG_FORMAT_SOURCES = utils/*.{h,c}
 CLANG_FORMAT_ARGS = -i -style=file constants.h utils/*.[h,c] $(SOURCES_FILES)
 
-build:
+# Valgrind memory checker
+VALGRIND = valgrind
+VALGRIND_ARGS = --track-origins=yes --quiet --error-exitcode=2 --leak-check=full --read-var-info=yes
+
+build: all-checks
 	for folder in ${SOURCES} ; \
 	do \
 		echo "> Building $$folder" ; \
@@ -36,6 +40,15 @@ splint:
 
 code-style:
 	$(CLANG_FORMAT) $(CLANG_FORMAT_ARGS)
+
+memory-check: build
+	for folder in ${SOURCES} ; \
+	do \
+		echo "> Executing Valgrind on $$folder" ; \
+		if [ -f $(wildcard "$$folder/$(BUILD_TARGET)") ] ; then \
+			$(VALGRIND) $(VALGRIND_ARGS) "$$folder/$(BUILD_TARGET)" ; \
+		fi \
+	done
 
 clean:
 	for folder in ${SOURCES} ; \
