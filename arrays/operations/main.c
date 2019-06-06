@@ -28,7 +28,7 @@ bool validate_array(array *arr)
 /**
  * Option callback: create an array with an specific size
  */
-void option_create_array(array *arr)
+array *option_create_array(array *arr)
 {
 	int size, element, index = 0;
 
@@ -77,12 +77,14 @@ void option_create_array(array *arr)
 	{
 		printf_error("There was an error while creating the array.", true);
 	}
+
+	return arr;
 }
 
 /**
  * Push an element to the end of the array
  */
-void option_push_array(array *arr)
+array *option_push_array(array *arr)
 {
 	if (validate_array(arr))
 	{
@@ -99,12 +101,14 @@ void option_push_array(array *arr)
 
 		print_array(arr);
 	}
+
+	return arr;
 }
 
 /**
  * Pop an element from end of the array
  */
-void option_pop_array(array *arr)
+array *option_pop_array(array *arr)
 {
 	int last;
 
@@ -113,19 +117,23 @@ void option_pop_array(array *arr)
 	if (arr->count > 0)
 	{
 		last = array_pop(arr);
+
 		printf_tabbed("Last item: %d\n\n", last);
+
 		print_array(arr);
 	}
 	else
 	{
 		printf_error("The array is empty\n", false);
 	}
+
+	return arr;
 }
 
 /**
  * Remove the first element from the array
  */
-void option_shift_array(array *arr)
+array *option_shift_array(array *arr)
 {
 	int first;
 
@@ -141,12 +149,14 @@ void option_shift_array(array *arr)
 	{
 		printf_error("The array is empty\n", false);
 	}
+
+	return arr;
 }
 
 /**
  * Insert an element onto the array
  */
-void option_insert_array(array *arr)
+array *option_insert_array(array *arr)
 {
 	int number, position = -1;
 
@@ -171,30 +181,38 @@ void option_insert_array(array *arr)
 	array_insert(arr, number, position);
 
 	print_array(arr);
+
+	return arr;
 }
 
 /**
  * Search an element on the array
  */
-void option_search_array(array *arr)
+array *option_search_array(array *arr)
 {
 	printf_title("Search", OPTION_SEARCH);
+
+	return arr;
 }
 
 /**
  * Calculate the product of elements of the array
  */
-void option_product_array(array *arr)
+array *option_product_array(array *arr)
 {
 	printf_title("Product", OPTION_PRODUCT);
+
+	return arr;
 }
 
 /**
  * Count all elements from the array
  */
-void option_count_array(array *arr)
+array *option_count_array(array *arr)
 {
 	printf_title("Count", OPTION_COUNT);
+
+	return arr;
 }
 
 /**
@@ -245,42 +263,44 @@ void print_main_header()
  * Helper function that process the array
  * depending of the selected option
  */
-void process_option(array *arr, int option)
+array *process_option(array *arr, int option)
 {
 	switch (option)
 	{
 		case OPTION_PUSH:
-			option_push_array(arr);
+			arr = option_push_array(arr);
 			break;
 
 		case OPTION_POP:
-			option_pop_array(arr);
+			arr = option_pop_array(arr);
 			break;
 
 		case OPTION_SHIFT:
-			option_shift_array(arr);
+			arr = option_shift_array(arr);
 			break;
 
 		case OPTION_INSERT:
-			option_insert_array(arr);
+			arr = option_insert_array(arr);
 			break;
 
 		case OPTION_SEARCH:
-			option_search_array(arr);
+			arr = option_search_array(arr);
 			break;
 
 		case OPTION_PRODUCT:
-			option_product_array(arr);
+			arr = option_product_array(arr);
 			break;
 
 		case OPTION_COUNT:
-			option_count_array(arr);
+			arr = option_count_array(arr);
 			break;
 
 		default:
-			option_create_array(arr);
+			arr = option_create_array(arr);
 			break;
 	}
+
+	return arr;
 }
 
 /**
@@ -305,9 +325,10 @@ int main(int argc, char const *argv[])
 		{
 			print_new_line();
 
-			process_option(arr, selected);
-
-			print_array(arr);
+			// I don't like to much this solution but is right for now
+			// @TODO Find a better way to modify the pointer (double pointer)
+			// in the function implementation with maybe 2 more levels
+			arr = process_option(arr, selected);
 		}
 	} while (selected != OPTION_EXIT);
 
