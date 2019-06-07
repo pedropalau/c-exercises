@@ -32,6 +32,15 @@ To check memory errors you can use `valgrind` with the command:
 $ valgrind <output_file> --track-origins=yes --leak-check=full --read-var-info=yes
 ```
 
+## Available commands
+
+This options are available using `make` command:
+
+* `make all-checks` - Run all checks over the code, like the code-style.
+* `make build` - Create a binary build of each `main.c` available on subfolders.
+* `make memory-check` - It runs `valgrind` to check memory errors.
+* `make clean` - Remove all the `build` binary files.
+
 ## TBD
 
 * [ ] Implements tests
