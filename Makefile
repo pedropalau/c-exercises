@@ -38,10 +38,10 @@ build: all-checks
 all-checks: code-style splint
 
 splint:
-	$(SPLINT) $(SPLINT_ARGS)
+	@$(SPLINT) $(SPLINT_ARGS)
 
 code-style:
-	$(CLANG_FORMAT) $(CLANG_FORMAT_ARGS)
+	@$(CLANG_FORMAT) $(CLANG_FORMAT_ARGS)
 
 memory-check: build
 	@for folder in ${SOURCES} ; \
