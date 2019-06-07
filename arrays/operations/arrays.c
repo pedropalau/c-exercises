@@ -35,7 +35,7 @@
  */
 void array_push(array *arr, int item)
 {
-	if (arr->count >= arr->size) { array_resize(arr); }
+	if ((size_t) arr->count >= arr->size) { array_resize(arr); }
 
 	array_set(arr, item, arr->count);
 	arr->count += 1;
@@ -46,7 +46,7 @@ void array_push(array *arr, int item)
  */
 int array_pop(array *arr)
 {
-	if (arr->count > 0)
+	if (arr->count > 0 && arr->items != NULL)
 	{
 		int i = arr->count - 1;
 		int last = arr->items[i];
@@ -63,7 +63,7 @@ int array_pop(array *arr)
  */
 int array_shift(array *arr)
 {
-	if (arr->count > 0)
+	if (arr->count > 0 && arr->items != NULL)
 	{
 		int i = 0;
 		int first = arr->items[i];
@@ -80,15 +80,18 @@ int array_shift(array *arr)
  */
 void array_insert(array *arr, int item, int index)
 {
-	if (arr->size <= arr->count) { array_resize(arr); }
-
-	if (index >= arr->count) { array_push(arr, item); }
-	else
+	if (arr->count > 0 && arr->items != NULL)
 	{
-		int i = arr->count;
-		for (; i >= index; i--) { array_set(arr, arr->items[i - 1], i); }
-		array_set(arr, item, index - 1);
-		arr->count += 1;
+		if (arr->size <= (size_t) arr->count) { array_resize(arr); }
+
+		if (index >= arr->count) { array_push(arr, item); }
+		else
+		{
+			int i = arr->count;
+			for (; i >= index; i--) { array_set(arr, arr->items[i - 1], i); }
+			array_set(arr, item, index - 1);
+			arr->count += 1;
+		}
 	}
 }
 
@@ -97,7 +100,7 @@ void array_insert(array *arr, int item, int index)
  */
 void array_set(array *arr, int item, int index)
 {
-	arr->items[index] = item;
+	if (arr->items != NULL) { arr->items[index] = item; }
 }
 
 /**

@@ -108,7 +108,7 @@ void print_options_error()
 		const char *count_repeat =
 		  repeat_str(CHAR_REPEAT, count_digits(arr->count));
 		const char *size_repeat =
-		  repeat_str(CHAR_REPEAT, count_digits(arr->size));
+		  repeat_str(CHAR_REPEAT, count_digits((int) arr->size));
 
 		printf_tabbed("%s%s%s\n", append, count_repeat, string);
 		printf_tabbed("| Length    | ");
@@ -123,12 +123,12 @@ void print_options_error()
 
 		printf_tabbed("%s%s%s\n", append, size_repeat, string);
 		printf_tabbed("| Size      | ");
-		if (arr->size > arr->count) { print_color_yellow(); }
+		if ((int) arr->size > arr->count) { print_color_yellow(); }
 		else
 		{
 			print_color_red();
 		}
-		printf("%d", arr->size);
+		printf("%d", (int) arr->size);
 		print_color_reset();
 		printf(" |\n");
 
@@ -140,7 +140,9 @@ void print_options_error()
 			for (i = 0; i < arr->count; i++)
 			{
 				const char *__append =
-				  repeat_str(CHAR_REPEAT, count_digits(arr->items[i]) + 3);
+				  repeat_str(CHAR_REPEAT, arr != NULL && arr->items != NULL
+				                            ? count_digits(arr->items[i]) + 3
+				                            : 1);
 				printf("%s", __append);
 				free((char *) __append);
 			}
@@ -166,7 +168,7 @@ void print_options_error()
 		for (i = 0; i < arr->count; i++)
 		{
 			print_color_yellow();
-			printf("%d", arr->items[i]);
+			printf("%d", arr != NULL && arr->items != NULL ? arr->items[i] : 0);
 			print_color_reset();
 			printf(" | ");
 		}
@@ -178,7 +180,8 @@ void print_options_error()
 		{
 			for (i = 0; i < arr->count; i++)
 			{
-				int count = count_digits(arr->items[i]);
+				int count = count_digits(
+				  arr != NULL && arr->items != NULL ? arr->items[i] : 0);
 				const char *__append = repeat_str(CHAR_REPEAT, count + 3);
 				printf("%s", __append);
 				free((char *) __append);
@@ -195,6 +198,7 @@ void print_options_error()
 		free((char *) offset);
 		free((char *) string);
 		free((char *) count_repeat);
+		free((char *) size_repeat);
 
 		print_new_line();
 	}
@@ -215,7 +219,7 @@ void print_new_line()
 /**
  * Do an `space` printing on terminal
  */
-void print_space()
+static void print_space()
 {
 	printf("%s", TAB_SIZE);
 }

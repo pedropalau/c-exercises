@@ -45,38 +45,31 @@ static bool validate_array(array *arr)
 			printf_error("Invalid size, please enter again", false);
 			printf_tabbed("Insert the size of the array (value "
 			              "between 1 - 10): ");
-			scanf("%d", &size);
+			(void) (scanf("%d", &size));
 		}
 	}
 
-	arr = array_create(size);
+	array *arr = array_create(size);
 
-	if (arr)
+	for (; index < size; index++)
 	{
-		for (; index < size; index++)
-		{
-			print_space();
-			print_color_blue();
-			printf(" => ");
-			print_color_reset();
-			printf("Enter element ");
-			print_color_yellow();
-			printf("#%d: ", index + 1);
-			print_color_reset();
-			scanf("%d", &element);
-			array_set(arr, element, index);
-		}
-
-		printf_success("Array created", true);
-
-		print_new_line();
-
-		print_array(arr);
+		print_space();
+		print_color_blue();
+		printf(" => ");
+		print_color_reset();
+		printf("Enter element ");
+		print_color_yellow();
+		printf("#%d: ", index + 1);
+		print_color_reset();
+		(void) (scanf("%d", &element));
+		array_set(arr, element, index);
 	}
-	else
-	{
-		printf_error("There was an error while creating the array.", true);
-	}
+
+	printf_success("Array created", true);
+
+	print_new_line();
+
+	print_array(arr);
 
 	return arr;
 }
