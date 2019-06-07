@@ -1,3 +1,5 @@
+RM = rm -f
+
 # Exercises source files
 ARRAY_SOURCES = arrays/sum-array arrays/operations
 SOURCES = $(ARRAY_SOURCES)
@@ -25,7 +27,7 @@ VALGRIND = valgrind
 VALGRIND_ARGS = --track-origins=yes --quiet --error-exitcode=2 --leak-check=full --read-var-info=yes
 
 build: all-checks
-	for folder in ${SOURCES} ; \
+	@for folder in ${SOURCES} ; \
 	do \
 		echo "> Building $$folder" ; \
 		if [ -f $(wildcard "$$folder/$(BUILD_SOURCE)") ] ; then \
@@ -42,7 +44,7 @@ code-style:
 	$(CLANG_FORMAT) $(CLANG_FORMAT_ARGS)
 
 memory-check: build
-	for folder in ${SOURCES} ; \
+	@for folder in ${SOURCES} ; \
 	do \
 		echo "> Executing Valgrind on $$folder" ; \
 		if [ -f $(wildcard "$$folder/$(BUILD_TARGET)") ] ; then \
@@ -51,10 +53,10 @@ memory-check: build
 	done
 
 clean:
-	for folder in ${SOURCES} ; \
+	@for folder in ${SOURCES} ; \
 	do \
 		echo "> Cleanning source $$folder" ; \
 		if [ -f $(wildcard "$$folder/$(BUILD_TARGET)") ] ; then \
-			$(RM) -f "$$folder/$(BUILD_TARGET)" ; \
+			$(RM) "$$folder/$(BUILD_TARGET)" ; \
 		fi \
 	done
