@@ -10,16 +10,22 @@
 /**
  * Create a new array object with an specific size
  */
-array *array_create(int count)
+/*@only@*/ /*@notnull@*/ array *array_create(int count)
 {
-	array *arr = (array *) malloc(sizeof(array));
-
-	if (arr)
+	array *arr = NULL;
+	do
 	{
-		arr->size = ARRAY_SIZE;
-		arr->count = count;
+		arr = (array *) malloc(sizeof(array));
+	} while (arr == NULL);
+
+	arr->size = ARRAY_SIZE;
+	arr->count = count;
+	arr->items = NULL;
+
+	do
+	{
 		arr->items = (int *) calloc(ARRAY_SIZE, sizeof(int));
-	}
+	} while (arr->items == NULL);
 
 	return arr;
 }
@@ -99,33 +105,26 @@ void array_set(array *arr, int item, int index)
  */
 void array_resize(array *arr)
 {
-	int size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
+	size_t size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
 	// Attempts to resize the memory block reserved for items
 	arr->items = realloc(arr->items, size_for_resize);
+	while (arr->items == NULL)
+	{ arr->items = realloc(arr->items, size_for_resize); }
 	arr->size *= ARRAY_SIZE;
 }
 
 /**
  * Delete the array and free the used memory
  */
-void array_free(array *arr)
+/*@null@*/ static void
+  array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/
 {
-	if (arr)
+	// array_reset(arr);
+	if (arr != NULL)
 	{
-		array_reset(arr);
-
 		free(arr->items);
 		free(arr);
 	}
-}
-
-/**
- * Reset the array to the default state
- */
-void array_reset(array *arr)
-{
-	arr->count = 0;
-	arr->items = NULL;
 }
 
 #endif

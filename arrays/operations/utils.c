@@ -12,13 +12,13 @@
  * Helper function for repeating a character
  * specific number of times
  */
-char *repeat_str(const char *string, int size)
+/*@notnull@*/ char *repeat_str(const char *string, int size)
 {
-	if (size == 0) { return NULL; }
-
-	char *result = malloc(strlen(string) * size + size);
-
-	if (result == NULL) { return NULL; }
+	char *result = NULL;
+	do
+	{
+		result = malloc(strlen(string) * size + size);
+	} while (result == NULL);
 
 	strcpy(result, string);
 	while (--size > 0) { strcat(result, string); }
@@ -32,7 +32,7 @@ char *repeat_str(const char *string, int size)
 int count_digits(int number)
 {
 	int count = 0;
-	int n = number ? number : 0;
+	int n = number;
 
 	while (n > 0)
 	{

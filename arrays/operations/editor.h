@@ -17,51 +17,51 @@
 /**
  * Print the program options
  */
-void print_options();
+extern void print_options();
 
 /**
  * Print a custom title on the terminal
  */
-void printf_title(char *message, int option);
+extern void printf_title(char *message, int option);
 
 /**
  * Print an error
  */
-void printf_error(char *message, bool space);
+extern void printf_error(char *message, bool space);
 
 /**
  * Print a success message
  */
-void printf_success(char *message, bool space);
+extern void printf_success(char *message, bool space);
 
 /**
  * Print the specified text with tab space
  */
-void printf_tabbed(const char *text, ...);
+extern void printf_tabbed(const char *text, ...);
 
 /**
  * Print an error when an incorrect option is selected
  */
-void print_options_error();
+extern void print_options_error();
 
 /**
  * Helper function for printing an array
  */
-void print_array(array *arr);
+/*@null@*/ extern void print_array(array *arr);
 
 /**
  * Print a new line on the terminal
  */
-void print_new_line();
+extern void print_new_line();
 
 /**
  * Do an `space` printing on terminal
  */
-void print_space();
+static void print_space();
 
 /**
  * Simulate an `hr` printing on the terminal
  */
-void print_hr();
+extern void print_hr();
 
 #endif

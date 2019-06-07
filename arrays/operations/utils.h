@@ -6,11 +6,11 @@
  * Helper function for repeating a character
  * specific number of times
  */
-char *repeat_str(const char *string, int size);
+/*@notnull@*/ extern char *repeat_str(const char *string, int size);
 
 /**
  * This function count digits on a number
  */
-int count_digits(int number);
+extern int count_digits(int number);
 
 #endif

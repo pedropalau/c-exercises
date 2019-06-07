@@ -5,9 +5,9 @@
 
 #include "../../utils/colors.c"
 
-int main(int argc, char const *argv[])
+int main()
 {
-	int i, j, total, sum = 0;
+	int i, sum = 0, total = 0;
 
 	print_color_green();
 	printf("Sum numbers in array");
@@ -19,7 +19,16 @@ int main(int argc, char const *argv[])
 	print_color_reset();
 
 	// Wait for the user input
-	scanf("%d", &total);
+	do
+	{
+		(void) (scanf("%d", &total) + 1);
+		if (total < 0)
+		{
+			print_color_red();
+			printf("Invalid array size entered\n");
+			print_color_reset();
+		}
+	} while (total < 0);
 
 	// Ask user for each number of the list
 	int numbers[total];
@@ -29,7 +38,7 @@ int main(int argc, char const *argv[])
 
 		// Take the input number entered by the user
 		// and insert it in `i` element
-		scanf("%d", &numbers[i]);
+		(void) (scanf("%d", &numbers[i]));
 		sum += numbers[i];
 	}
 
@@ -38,13 +47,12 @@ int main(int argc, char const *argv[])
 	print_color_reset();
 	printf(" [");
 
-	for (j = 0; j < total; j++)
+	for (i = 0; i < total; i++)
 	{
-		if (j < total - 1) { printf("%d, ", numbers[j]); }
+		if (i < total - 1) { printf("%d, ", numbers[i]); }
 		else
 		{
-			// The last number of the list
-			printf("%d", numbers[j]);
+			printf("%d", numbers[i]);
 		}
 	}
 	printf("]\n");

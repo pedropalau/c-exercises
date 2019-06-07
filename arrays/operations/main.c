@@ -15,7 +15,7 @@
 /**
  * Validate if the array is initialized
  */
-bool validate_array(array *arr)
+static bool validate_array(array *arr)
 {
 	if (arr != NULL) { return true; }
 
@@ -28,7 +28,7 @@ bool validate_array(array *arr)
 /**
  * Option callback: create an array with an specific size
  */
-array *option_create_array(array *arr)
+/*@notnull@*/ static array *option_create_array()
 {
 	int size, element, index = 0;
 
@@ -36,7 +36,7 @@ array *option_create_array(array *arr)
 
 	printf_tabbed("Insert the size of the array (value between 1 - 10): ");
 
-	scanf("%d", &size);
+	(void) (scanf("%d", &size));
 
 	if (size < ARRAY_MIN_SIZE || size > ARRAY_MAX_SIZE)
 	{
@@ -84,7 +84,7 @@ array *option_create_array(array *arr)
 /**
  * Push an element to the end of the array
  */
-array *option_push_array(array *arr)
+/*@null@*/ static void option_push_array(array *arr)
 {
 	if (validate_array(arr))
 	{
@@ -93,7 +93,7 @@ array *option_push_array(array *arr)
 		printf_title("Push", OPTION_PUSH);
 
 		printf_tabbed("Type the element to push: ");
-		scanf("%d", &number);
+		(void) (scanf("%d", &number));
 
 		print_new_line();
 
@@ -102,13 +102,13 @@ array *option_push_array(array *arr)
 		print_array(arr);
 	}
 
-	return arr;
+	// return arr;
 }
 
 /**
  * Pop an element from end of the array
  */
-array *option_pop_array(array *arr)
+static void option_pop_array(array *arr)
 {
 	int last;
 
@@ -127,13 +127,13 @@ array *option_pop_array(array *arr)
 		printf_error("The array is empty\n", false);
 	}
 
-	return arr;
+	// return arr;
 }
 
 /**
  * Remove the first element from the array
  */
-array *option_shift_array(array *arr)
+static void option_shift_array(array *arr)
 {
 	int first;
 
@@ -150,25 +150,25 @@ array *option_shift_array(array *arr)
 		printf_error("The array is empty\n", false);
 	}
 
-	return arr;
+	// return arr;
 }
 
 /**
  * Insert an element onto the array
  */
-array *option_insert_array(array *arr)
+static void option_insert_array(array *arr)
 {
 	int number, position = -1;
 
 	printf_title("Insert", OPTION_INSERT);
 
 	printf_tabbed("Type element to insert: ");
-	scanf("%d", &number);
+	(void) (scanf("%d", &number));
 
 	while (position < 0 || position > arr->count + 1)
 	{
 		printf_tabbed("Type the position where to insert: ");
-		scanf("%d", &position);
+		(void) (scanf("%d", &position));
 		if (position < 0 || position > arr->count + 1)
 		{
 			printf_error("Please insert a position between 0 to [total]",
@@ -181,44 +181,36 @@ array *option_insert_array(array *arr)
 	array_insert(arr, number, position);
 
 	print_array(arr);
-
-	return arr;
 }
 
 /**
  * Search an element on the array
  */
-array *option_search_array(array *arr)
+static void option_search_array(/*@unused@*/ array *arr)
 {
 	printf_title("Search", OPTION_SEARCH);
-
-	return arr;
 }
 
 /**
  * Calculate the product of elements of the array
  */
-array *option_product_array(array *arr)
+static void option_product_array(/*@unused@*/ array *arr)
 {
 	printf_title("Product", OPTION_PRODUCT);
-
-	return arr;
 }
 
 /**
  * Count all elements from the array
  */
-array *option_count_array(array *arr)
+static void option_count_array(/*@unused@*/ array *arr)
 {
 	printf_title("Count", OPTION_COUNT);
-
-	return arr;
 }
 
 /**
  * Helper function to validate the selected option
  */
-bool option_validate(int option)
+static bool option_validate(int option)
 {
 	int size = 9, i = 0;
 
@@ -238,7 +230,7 @@ bool option_validate(int option)
  * Helper function for printing the header
  * of the main program
  */
-void print_main_header()
+static void print_main_header()
 {
 	print_space();
 	print_color_green();
@@ -263,54 +255,41 @@ void print_main_header()
  * Helper function that process the array
  * depending of the selected option
  */
-array *process_option(array *arr, int option)
+/*static array *process_option(array *arr, int option)
 {
-	switch (option)
-	{
-		case OPTION_PUSH:
-			arr = option_push_array(arr);
-			break;
+    switch (option)
+    {
+        case OPTION_PUSH:
+            return option_push_array(arr);
 
-		case OPTION_POP:
-			arr = option_pop_array(arr);
-			break;
+        case OPTION_POP:
+            return option_pop_array(arr);
 
-		case OPTION_SHIFT:
-			arr = option_shift_array(arr);
-			break;
+        case OPTION_SHIFT:
+            return option_shift_array(arr);
 
-		case OPTION_INSERT:
-			arr = option_insert_array(arr);
-			break;
+        case OPTION_INSERT:
+            return option_insert_array(arr);
 
-		case OPTION_SEARCH:
-			arr = option_search_array(arr);
-			break;
+        case OPTION_SEARCH:
+            return option_search_array(arr);
 
-		case OPTION_PRODUCT:
-			arr = option_product_array(arr);
-			break;
+        case OPTION_PRODUCT:
+            return option_product_array(arr);
 
-		case OPTION_COUNT:
-			arr = option_count_array(arr);
-			break;
-
-		default:
-			arr = option_create_array(arr);
-			break;
-	}
-
-	return arr;
-}
+        default:
+            return option_count_array(arr);
+    }
+}*/
 
 /**
  * The main program
  */
-int main(int argc, char const *argv[])
+int main()
 {
 	int selected;
 
-	array *arr = NULL;
+	/*@notnull@*/ /*@only@*/ array *arr = array_create(0);
 
 	print_main_header();
 
@@ -318,17 +297,56 @@ int main(int argc, char const *argv[])
 	{
 		print_options();
 
-		scanf("%d", &selected);
+		(void) (scanf("%d", &selected));
 
 		if (option_validate(selected) == false) { print_options_error(); }
 		else if (selected != OPTION_EXIT)
 		{
 			print_new_line();
 
-			// I don't like to much this solution but is right for now
-			// @TODO Find a better way to modify the pointer (double pointer)
-			// in the function implementation with maybe 2 more levels
-			arr = process_option(arr, selected);
+			if (selected == OPTION_CREATE)
+			{
+				array_free(arr);
+				arr = option_create_array();
+			}
+			else
+			{
+				// I don't like to much this solution but is right for now
+				// @TODO Find a better way to modify the pointer (double
+				// pointer) in the function implementation with maybe 2 more
+				// levels
+				// arr = process_option(arr, selected);
+				switch (selected)
+				{
+					case OPTION_PUSH:
+						option_push_array(arr);
+						break;
+
+					case OPTION_POP:
+						option_pop_array(arr);
+						break;
+
+					case OPTION_SHIFT:
+						option_shift_array(arr);
+						break;
+
+					case OPTION_INSERT:
+						option_insert_array(arr);
+						break;
+
+					case OPTION_SEARCH:
+						option_search_array(arr);
+						break;
+
+					case OPTION_PRODUCT:
+						option_product_array(arr);
+						break;
+
+					default:
+						option_count_array(arr);
+						break;
+				}
+			}
 		}
 	} while (selected != OPTION_EXIT);
 

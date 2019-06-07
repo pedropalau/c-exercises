@@ -81,7 +81,7 @@ void printf_tabbed(const char *text, ...)
 	va_list args;
 	va_start(args, text);
 	print_space();
-	vprintf(text, args);
+	(void) (vprintf(text, args));
 	va_end(args);
 }
 
@@ -96,7 +96,7 @@ void print_options_error()
 /**
  * Helper function for printing an array
  */
-void print_array(array *arr)
+/*@null@*/ void print_array(array *arr)
 {
 	if (arr)
 	{
