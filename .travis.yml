@@ -9,12 +9,21 @@ addons:
   apt:
     packages:
       - clang
-      - clang-format
-      - splint
 
 compiler:
   - gcc
   - clang
+
+before_install:
+  - $CC --version
+  - which $CC
+
+  - export CC=`which $CC`
+
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then sudo apt-get update --quiet --assume-yes; fi
+
+  - sudo apt-get install splint=3.1.2+dfsg-1build1 --quiet --assume-yes
+  - apt-get install clang-format-6.0 --quiet --assume-yes
 
 script:
   - make all-checks
