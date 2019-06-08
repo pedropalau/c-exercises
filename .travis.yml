@@ -1,9 +1,14 @@
 language: c
 
-os:
-  - linux
-
-dist: xenial
+matrix:
+  fast_finish: true
+  include:
+    - os: linux
+      dist: trusty
+      compiler: clang
+    - os: linux
+      dist: trusty
+      compiler: gcc
 
 addons:
   apt:
