@@ -14,6 +14,9 @@ matrix:
 
 addons:
   apt:
+    update: true
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
       - clang
 
@@ -30,7 +33,7 @@ before_install:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then sudo apt-get update --quiet --assume-yes; fi
 
   - sudo apt-get install splint --quiet --assume-yes
-  - apt-get install clang-format-6.0 --quiet --assume-yes
+  - sudo apt-get install clang-format-6.0 --quiet --assume-yes
 
 script:
   - make all-checks
