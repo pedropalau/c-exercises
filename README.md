@@ -43,6 +43,7 @@ This options are available using `make` command:
 
 ## TBD
 
-* [ ] Implements tests
 * [x] Configure clang-format for code styling
 * [x] Use Makefile for automatic code checking and testing
+* [ ] Configure Travis CI
+* [ ] Implement tests
