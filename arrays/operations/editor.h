@@ -57,7 +57,7 @@ extern void print_new_line();
 /**
  * Do an `space` printing on terminal
  */
-static void print_space();
+/*@unused@*/ static void print_space();
 
 /**
  * Simulate an `hr` printing on the terminal

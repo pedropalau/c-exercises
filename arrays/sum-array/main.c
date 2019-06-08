@@ -7,7 +7,7 @@
 
 int main()
 {
-	int i, sum = 0, total = 0;
+	int i, input, number, sum = 0, total = 0;
 
 	print_color_green();
 	printf("Sum numbers in array");
@@ -32,14 +32,19 @@ int main()
 
 	// Ask user for each number of the list
 	int numbers[total];
+	memset(numbers, 0, (size_t) total);
 	for (i = 0; i < total; i++)
 	{
-		printf("Enter number %d: ", i + 1);
+		printf("Enter number");
+		print_color_blue();
+		printf(" #%d: ", i + 1);
+		print_color_reset();
 
 		// Take the input number entered by the user
 		// and insert it in `i` element
-		(void) (scanf("%d", &numbers[i]));
-		sum += numbers[i];
+		(void) (scanf("%d", &input));
+		numbers[i] = input;
+		sum += input;
 	}
 
 	print_color_yellow();
@@ -49,10 +54,11 @@ int main()
 
 	for (i = 0; i < total; i++)
 	{
-		if (i < total - 1) { printf("%d, ", numbers[i]); }
+		number = numbers[i];
+		if (i < total - 1) { printf("%d, ", number); }
 		else
 		{
-			printf("%d", numbers[i]);
+			printf("%d", number);
 		}
 	}
 	printf("]\n");

@@ -76,7 +76,7 @@ extern int array_count(array *arr);
 /**
  * Delete the array
  */
-/*@null@*/ static void
+/*@null@*/ extern void
   array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/;
 
 /**

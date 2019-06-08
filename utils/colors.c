@@ -1,8 +1,10 @@
+#ifndef C_UTILS_COLORS
+
 #define C_UTILS_COLORS
 
 #include "../constants.h"
 
-static void print_color(char *color)
+/*@unused@*/ void print_color(char *color)
 {
 	printf("%s", color);
 }
@@ -31,3 +33,5 @@ void print_color_reset()
 {
 	printf(COLOR_RESET);
 }
+
+#endif

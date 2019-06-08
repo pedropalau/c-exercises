@@ -5,31 +5,31 @@
 /**
  * Print an specific color
  */
-static void print_color(char *color);
+extern void print_color(char *color);
 
 /**
  * Print a `blue` color on the terminal
  */
-void print_color_blue();
+extern void print_color_blue();
 
 /**
  * Print a `red` color on the terminal
  */
-void print_color_red();
+extern void print_color_red();
 
 /**
  * Print a `green` color on the terminal
  */
-void print_color_green();
+extern void print_color_green();
 
 /**
  * Print a `yello` color on the terminal
  */
-void print_color_yellow();
+extern void print_color_yellow();
 
 /**
  * Reset color to the default state
  */
-void print_color_reset();
+extern void print_color_reset();
 
 #endif

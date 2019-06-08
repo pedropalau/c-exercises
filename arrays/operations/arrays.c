@@ -119,8 +119,7 @@ void array_resize(array *arr)
 /**
  * Delete the array and free the used memory
  */
-/*@null@*/ static void
-  array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/
+/*@null@*/ void array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/
 {
 	// array_reset(arr);
 	if (arr != NULL)
