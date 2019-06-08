@@ -2,20 +2,8 @@ language: c
 
 os:
   - linux
-  - osx
 
 dist: xenial
 
-osx_image: xcode10.1
-
 compiler:
-  - clang
   - gcc
-
-addons:
-  apt:
-		packages:
-			- valgrind
-			- clang
-			- clang-format
-			- splint
