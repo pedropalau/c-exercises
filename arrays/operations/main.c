@@ -94,8 +94,6 @@ static bool validate_array(array *arr)
 
 		print_array(arr);
 	}
-
-	// return arr;
 }
 
 /**
@@ -119,8 +117,6 @@ static void option_pop_array(array *arr)
 	{
 		printf_error("The array is empty\n", false);
 	}
-
-	// return arr;
 }
 
 /**
@@ -142,8 +138,6 @@ static void option_shift_array(array *arr)
 	{
 		printf_error("The array is empty\n", false);
 	}
-
-	// return arr;
 }
 
 /**
@@ -245,37 +239,6 @@ static void print_main_header()
 }
 
 /**
- * Helper function that process the array
- * depending of the selected option
- */
-/*static array *process_option(array *arr, int option)
-{
-    switch (option)
-    {
-        case OPTION_PUSH:
-            return option_push_array(arr);
-
-        case OPTION_POP:
-            return option_pop_array(arr);
-
-        case OPTION_SHIFT:
-            return option_shift_array(arr);
-
-        case OPTION_INSERT:
-            return option_insert_array(arr);
-
-        case OPTION_SEARCH:
-            return option_search_array(arr);
-
-        case OPTION_PRODUCT:
-            return option_product_array(arr);
-
-        default:
-            return option_count_array(arr);
-    }
-}*/
-
-/**
  * The main program
  */
 int main()
@@ -308,7 +271,6 @@ int main()
 				// @TODO Find a better way to modify the pointer (double
 				// pointer) in the function implementation with maybe 2 more
 				// levels
-				// arr = process_option(arr, selected);
 				switch (selected)
 				{
 					case OPTION_PUSH:
