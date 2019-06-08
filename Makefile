@@ -15,7 +15,7 @@ BUILD_TARGET = build
 
 # Statically checking C programs for security vulnerabilities and coding mistakes
 SPLINT = splint
-SPLINT_ARGS = $(SOURCES_FILES)
+SPLINT_COMMON_SOURCES = utils/*.[h,c]
 
 # Coding style and formatting
 CLANG_FORMAT = clang-format
@@ -38,7 +38,13 @@ build: all-checks
 all-checks: code-style splint
 
 splint:
-	@$(SPLINT) $(SPLINT_ARGS)
+	@for folder in ${SOURCES} ; \
+	do \
+		if [ -f $(wildcard "$$folder") ] ; then \
+			$(SPLINT) $(SPLINT_COMMON_SOURCES) "$$folder"/*.[h,c] ; \
+		fi \
+	done
+	
 
 code-style:
 	@$(CLANG_FORMAT) $(CLANG_FORMAT_ARGS)
