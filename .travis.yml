@@ -5,5 +5,17 @@ os:
 
 dist: xenial
 
+addons:
+  apt:
+    packages:
+      - clang
+      - clang-format
+      - splint
+
 compiler:
   - gcc
+  - clang
+
+script:
+  - make all-checks
+
