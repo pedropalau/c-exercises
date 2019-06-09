@@ -5,9 +5,13 @@
 
 #include "../../utils/colors.c"
 
+#define MIN_SIZE 2
+#define MAX_SIZE 100
+
 int main()
 {
 	int i, input, number, sum = 0, total = 0;
+	int numbers[MAX_SIZE];
 
 	print_color_green();
 	printf("Sum numbers in array");
@@ -15,23 +19,23 @@ int main()
 	printf("\n");
 
 	print_color_yellow();
-	printf("Enter the total of numbers to sum: ");
+	printf("Enter the total of numbers to sum (between %d and %d): ", MIN_SIZE,
+	       MAX_SIZE);
 	print_color_reset();
 
 	// Wait for the user input
 	do
 	{
 		(void) (scanf("%d", &total) + 1);
-		if (total < 0)
+		if (total < MIN_SIZE || total > MAX_SIZE)
 		{
 			print_color_red();
-			printf("Invalid array size entered\n");
+			printf("Invalid size entered\n");
 			print_color_reset();
 		}
-	} while (total < 0);
+	} while (total < MIN_SIZE || total > MAX_SIZE);
 
 	// Ask user for each number of the list
-	int numbers[total];
 	memset(numbers, 0, (size_t) total);
 	for (i = 0; i < total; i++)
 	{
