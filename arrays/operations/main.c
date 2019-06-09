@@ -31,6 +31,7 @@ static bool validate_array(array *arr)
 /*@notnull@*/ static array *option_create_array()
 {
 	int size, element, index = 0;
+	array *arr = NULL;
 
 	printf_title("Create array", OPTION_CREATE);
 
@@ -49,7 +50,7 @@ static bool validate_array(array *arr)
 		}
 	}
 
-	array *arr = array_create(size);
+	arr = array_create(size);
 
 	for (; index < size; index++)
 	{
