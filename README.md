@@ -1,6 +1,6 @@
 # C programming exercises
 
-[![Build Status](https://travis-ci.org/peterpalau/c-exercises.svg?branch=master)](https://travis-ci.org/peterpalau/c-exercises)
+[![Build Status](https://travis-ci.org/peterpalau/c-exercises.svg?branch=master)](https://travis-ci.org/peterpalau/c-exercises) [![GitHub license](https://img.shields.io/github/license/peterpalau/c-exercises.svg)](https://github.com/peterpalau/c-exercises/blob/master/LICENSE)
 
 This repository contains some exercises implementations and code exploration based on `c`, with the purpose of becoming more familiar with the language.
 
