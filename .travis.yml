@@ -11,18 +11,6 @@ matrix:
     - os: linux
       dist: xenial
       compiler: gcc
-    - os: linux
-      dist: trusty
-      compiler: clang
-    - os: linux
-      dist: trusty
-      compiler: gcc
-    - os: linux
-      dist: precise
-      compiler: clang
-    - os: linux
-      dist: precise
-      compiler: gcc
 
 addons:
   apt:
