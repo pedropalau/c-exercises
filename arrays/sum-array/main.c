@@ -2,6 +2,7 @@
 // inserted by the user using arrays
 
 #include <stdio.h>
+#include <string.h>
 
 #include "../../utils/colors.c"
 
@@ -35,8 +36,9 @@ int main()
 		}
 	} while (total < MIN_SIZE || total > MAX_SIZE);
 
-	// Ask user for each number of the list
 	memset(numbers, 0, (size_t) total);
+
+	// Ask user for each number of the list
 	for (i = 0; i < total; i++)
 	{
 		printf("Enter number");
