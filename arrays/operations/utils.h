@@ -6,11 +6,21 @@
  * Helper function for repeating a character
  * specific number of times
  */
-/*@notnull@*/ extern char *repeat_str(const char *string, int size);
+/*@notnull@*/ extern char *repeat_str(char *string, int size);
 
 /**
  * This function count digits on a number
  */
 extern int count_digits(int number);
+
+/**
+ * This function count the number of chars in string
+ */
+extern int count_chars(const char *string);
+
+/**
+ * Join two strings
+ */
+extern void join_str(char *str1, char *str2);
 
 #endif
