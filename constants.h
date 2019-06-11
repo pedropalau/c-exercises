@@ -12,6 +12,5 @@
 /* Editor and printing group */
 #define TAB_SIZE "\t"
 #define NEW_LINE "\n"
-#define CHAR_REPEAT "-"
 
 #endif
