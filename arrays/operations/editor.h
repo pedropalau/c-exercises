@@ -47,7 +47,7 @@ extern void print_options_error();
 /**
  * Helper function for printing an array
  */
-/*@null@*/ extern void print_array(array *arr);
+extern void print_array(array *arr);
 
 /**
  * Print a new line on the terminal

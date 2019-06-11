@@ -7,7 +7,7 @@
 #include "../../constants.h"
 
 #include "editor.h"
-
+#include "helpers.c"
 #include "utils.c"
 
 /**
@@ -93,120 +93,72 @@ void print_options_error()
 	printf_error("Invalid option selected", true);
 }
 
-/**
- * Helper function for printing an array
- */
-/*@null@*/ void print_array(array *arr)
+// @group Array printing related functions
+// ======================================================================
+void print_array_length(array *arr)
 {
-	if (arr)
-	{
-		int i;
-		const char *append = repeat_str(CHAR_REPEAT, 11);
-		const char *offset = repeat_str(CHAR_REPEAT, 2);
-		const char *string = repeat_str(CHAR_REPEAT, 5);
-
-		const char *count_repeat =
-		  repeat_str(CHAR_REPEAT, count_digits(arr->count));
-		const char *size_repeat =
-		  repeat_str(CHAR_REPEAT, count_digits((int) arr->size));
-
-		printf_tabbed("%s%s%s\n", append, count_repeat, string);
-		printf_tabbed("| Length    | ");
-		if (arr->count > 0) { print_color_yellow(); }
-		else
-		{
-			print_color_red();
-		}
-		printf("%d", arr->count);
-		print_color_reset();
-		printf(" |\n");
-
-		printf_tabbed("%s%s%s\n", append, size_repeat, string);
-		printf_tabbed("| Size      | ");
-		if ((int) arr->size > arr->count) { print_color_yellow(); }
-		else
-		{
-			print_color_red();
-		}
-		printf("%d", (int) arr->size);
-		print_color_reset();
-		printf(" |\n");
-
-		printf_tabbed("%s%s", append, offset);
-
-		// Print the repeater char based on the digits
-		if (arr->count > 0)
-		{
-			for (i = 0; i < arr->count; i++)
-			{
-				const char *__append =
-				  repeat_str(CHAR_REPEAT, arr != NULL && arr->items != NULL
-				                            ? count_digits(arr->items[i]) + 3
-				                            : 1);
-				printf("%s", __append);
-				free((char *) __append);
-			}
-		}
-		else
-		{
-			const char *__append = repeat_str(CHAR_REPEAT, 4);
-			printf("%s", __append);
-			free((char *) __append);
-		}
-
-		print_new_line();
-		printf_tabbed("| Elements  | ");
-
-		if (arr->count == 0)
-		{
-			print_color_red();
-			printf("x");
-			print_color_reset();
-			printf(" |");
-		}
-
-		for (i = 0; i < arr->count; i++)
-		{
-			print_color_yellow();
-			printf("%d", arr != NULL && arr->items != NULL ? arr->items[i] : 0);
-			print_color_reset();
-			printf(" | ");
-		}
-
-		print_new_line();
-		printf_tabbed("%s%s", append, offset);
-
-		if (arr->count > 0)
-		{
-			for (i = 0; i < arr->count; i++)
-			{
-				int count = count_digits(
-				  arr != NULL && arr->items != NULL ? arr->items[i] : 0);
-				const char *__append = repeat_str(CHAR_REPEAT, count + 3);
-				printf("%s", __append);
-				free((char *) __append);
-			}
-		}
-		else
-		{
-			const char *__append = repeat_str(CHAR_REPEAT, 4);
-			printf("%s", __append);
-			free((char *) __append);
-		}
-
-		free((char *) append);
-		free((char *) offset);
-		free((char *) string);
-		free((char *) count_repeat);
-		free((char *) size_repeat);
-
-		print_new_line();
-	}
-	else
-	{
-		printf_error("Invalid array", true);
-	}
+	print_array_start(arr);
+	print_array_fields(arr);
+	print_new_line();
+	print_label("Length", arr);
+	print_value(arr->count, arr, true);
 }
+
+void print_array_size(array *arr)
+{
+	print_array_middle(arr);
+	print_array_fields(arr);
+	print_new_line();
+	print_label("Size", arr);
+	print_value((int) arr->size, arr, true);
+}
+
+void print_array_indexes(array *arr)
+{
+	print_array_middle(arr);
+	print_array_slots(arr);
+	print_new_line();
+	print_label("Indexes", arr);
+	print_indexes(arr);
+}
+
+void print_array_elements(array *arr)
+{
+	print_array_middle(arr);
+	print_array_slots(arr);
+	print_new_line();
+	print_label("Elements", arr);
+	print_elements(arr);
+}
+
+/**
+ * This function print the following structure:
+ * +------------------------------+
+ * | Length       | 10            |
+ * +------------------------------+
+ * | Size         | 10            |
+ * +------------------------------+
+ * | Indexes      | 0 | 1 | 2 | 3 |
+ * +------------------------------+
+ * | Elements     | 1 | 2 | 3 | 4 |
+ * +------------------------------+
+ */
+void print_array(array *arr)
+{
+	print_array_length(arr);
+	print_new_line();
+	print_array_size(arr);
+	print_new_line();
+	print_array_indexes(arr);
+	print_new_line();
+	print_array_elements(arr);
+	print_new_line();
+	print_array_end(arr);
+	print_array_slots(arr);
+	print_new_line();
+}
+
+// ======================================================================
 
 /**
  * Print a new line on the terminal
