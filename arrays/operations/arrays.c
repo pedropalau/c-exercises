@@ -135,6 +135,22 @@ extern int array_product(array *arr)
 }
 
 /**
+ * Return the number of occurrences of `x` in the array.
+ */
+extern int array_count(array *arr, int x)
+{
+	int count = 0, i = 0;
+	if (arr != NULL && arr->items != NULL)
+	{
+		for (; i < arr->count; i++)
+		{
+			if (arr->items[i] == x) { count += 1; }
+		}
+	}
+	return count;
+}
+
+/**
  * Set the element on the specific inex
  */
 void array_set(array *arr, int item, int index)

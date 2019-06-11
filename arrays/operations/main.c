@@ -224,11 +224,37 @@ static void option_product_array(array *arr)
 }
 
 /**
- * Count all elements from the array
+ * Return the number of occurrences of `number` in the array.
  */
-static void option_count_array(/*@unused@*/ array *arr)
+static void option_count_array(array *arr)
 {
+	int count = 0, number;
+
 	printf_title("Count", OPTION_COUNT);
+
+	printf_tabbed("Enter the element to count: ");
+	(void) (scanf("%d", &number));
+	print_new_line();
+
+	count = array_count(arr, number);
+
+	if (count == 0)
+	{ printf_error("That element doesn't appear in the array", false); } else
+	{
+		printf_tabbed("The element");
+		print_color_yellow();
+		printf(" %d ", number);
+		print_color_reset();
+		printf("appear");
+		print_color_green();
+		printf(" %d ", count);
+		print_color_reset();
+		printf("time(s) in the array");
+		print_new_line();
+	}
+
+	print_new_line();
+	print_array(arr);
 }
 
 /**

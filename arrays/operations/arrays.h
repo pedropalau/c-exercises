@@ -69,9 +69,9 @@ extern int array_search(array *arr, int item);
 extern int array_product(array *arr);
 
 /**
- * Count all elements in an array
+ * Return the number of occurrences of `x` in the array.
  */
-extern int array_count(array *arr);
+extern int array_count(array *arr, int x);
 
 /**
  * Delete the array
