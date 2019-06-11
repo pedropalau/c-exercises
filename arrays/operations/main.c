@@ -174,9 +174,33 @@ static void option_insert_array(array *arr)
 /**
  * Search an element on the array
  */
-static void option_search_array(/*@unused@*/ array *arr)
+static void option_search_array(array *arr)
 {
+	int number, index;
+
 	printf_title("Search", OPTION_SEARCH);
+
+	printf_tabbed("Type the element you want to search for: ");
+	print_color_green();
+	(void) (scanf("%d", &number));
+	print_color_reset();
+
+	print_new_line();
+
+	index = array_search(arr, number);
+
+	if (index > -1)
+	{
+		printf_tabbed("The element appears at position: ");
+		print_color_yellow();
+		printf("%d\n\n", index);
+		print_color_reset();
+		print_array(arr);
+	}
+	else
+	{
+		printf_error("That element doesn't appear in the array", false);
+	}
 }
 
 /**

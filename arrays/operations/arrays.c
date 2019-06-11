@@ -96,6 +96,25 @@ void array_insert(array *arr, int item, int index)
 }
 
 /**
+ * Searches the array for a given value and returns
+ * the first corresponding key if successful
+ */
+int array_search(array *arr, int item)
+{
+	int i = 0;
+
+	if (arr->items != NULL)
+	{
+		for (; i < arr->count; i++)
+		{
+			if (arr->items[i] == item) { return i; }
+		}
+	}
+
+	return -1;
+}
+
+/**
  * Set the element on the specific inex
  */
 void array_set(array *arr, int item, int index)

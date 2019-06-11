@@ -61,7 +61,7 @@ extern void array_insert(array *arr, int item, int index);
  * Searches the array for a given value and returns
  * the first corresponding key if successful
  */
-extern int array_search(array *arr, int *item);
+extern int array_search(array *arr, int item);
 
 /**
  * Calculate the product of values in an array
