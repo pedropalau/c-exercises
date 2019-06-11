@@ -103,7 +103,7 @@ int array_search(array *arr, int item)
 {
 	int i = 0;
 
-	if (arr->items != NULL)
+	if (arr != NULL && arr->items != NULL)
 	{
 		for (; i < arr->count; i++)
 		{
@@ -112,6 +112,26 @@ int array_search(array *arr, int item)
 	}
 
 	return -1;
+}
+
+/**
+ * Calculate the product of values in an array
+ */
+extern int array_product(array *arr)
+{
+	int i = 0, product = 0;
+	if (arr != NULL && arr->items != NULL)
+	{
+		for (; i < arr->count; i++)
+		{
+			if (i == 0) { product = arr->items[i]; }
+			else
+			{
+				product *= arr->items[i];
+			}
+		}
+	}
+	return product;
 }
 
 /**

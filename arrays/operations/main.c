@@ -206,9 +206,21 @@ static void option_search_array(array *arr)
 /**
  * Calculate the product of elements of the array
  */
-static void option_product_array(/*@unused@*/ array *arr)
+static void option_product_array(array *arr)
 {
+	int product;
+
 	printf_title("Product", OPTION_PRODUCT);
+
+	product = array_product(arr);
+
+	printf_tabbed("Product of values in the array: ");
+
+	print_color_yellow();
+	printf("%d", product);
+	print_color_reset();
+
+	print_new_line();
 }
 
 /**
