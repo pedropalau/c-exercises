@@ -4,6 +4,10 @@
 
 This repository contains some exercises implementations and code exploration based on `c`, with the purpose of becoming more familiar with the language.
 
+#### My goal
+
+Learn C, instead of just stringing random characters together until it compiles (with warnings).
+
 ## Building
 
 For building the exercises on Linux-based distributions, you can use the `gcc` compiler with the command:
