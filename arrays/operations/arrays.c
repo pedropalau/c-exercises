@@ -35,9 +35,8 @@
  */
 void array_push(array *arr, int item)
 {
-	if ((size_t) arr->count >= arr->size) { array_resize(arr); }
-
-	array_set(arr, item, arr->count);
+	if (arr->count >= 0 && (size_t) arr->count >= arr->size)
+	{ array_resize(arr); } array_set(arr, item, arr->count);
 	arr->count += 1;
 }
 
