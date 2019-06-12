@@ -372,5 +372,5 @@ int main()
 
 	printf_success("Exiting program", true);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
