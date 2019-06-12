@@ -48,4 +48,8 @@ This options are available using `make` command:
 * [x] Configure clang-format for code styling
 * [x] Use Makefile for automatic code checking and testing
 * [ ] Configure Travis CI
+  * [ ] Configure Windows
+  * [ ] Configure MacOS
+  * [ ] Configure FreeBSD
+  * [ ] Configure multiple versions of Ubuntu
 * [ ] Implement tests
