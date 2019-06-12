@@ -81,10 +81,9 @@ void array_insert(array *arr, int item, int index)
 {
 	if (arr->count > 0 && arr->items != NULL)
 	{
-		if (arr->size <= (size_t) arr->count) { array_resize(arr); }
-
-		if (index >= arr->count) { array_push(arr, item); }
-		else
+		if (arr->count >= 0 && arr->size <= (size_t) arr->count)
+		{ array_resize(arr); } if (index >= arr->count)
+		{ array_push(arr, item); } else
 		{
 			int i = arr->count;
 			for (; i > index; i--) { array_set(arr, arr->items[i - 1], i); }
