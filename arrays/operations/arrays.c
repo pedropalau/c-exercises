@@ -88,8 +88,8 @@ void array_insert(array *arr, int item, int index)
 		else
 		{
 			int i = arr->count;
-			for (; i >= index; i--) { array_set(arr, arr->items[i - 1], i); }
-			array_set(arr, item, index - 1);
+			for (; i > index; i--) { array_set(arr, arr->items[i - 1], i); }
+			array_set(arr, item, index);
 			arr->count += 1;
 		}
 	}
