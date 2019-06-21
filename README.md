@@ -8,6 +8,13 @@ This repository contains some exercises implementations and code exploration bas
 
 Learn C, instead of just stringing random characters together until it compiles (with warnings).
 
+## Documentations
+
+List of useful reads about C language and related tools like Splint and Clang.
+
+- [Splint](http://splint.org/) - Tool for statically checking C programs for security vulnerabilities and coding mistakes
+  - [Static Detection of Dynamic Memory Errors](http://www.cs.virginia.edu/~evans/pubs/pldi96.pdf) by David Evans, MIT Laboratory for Computer Science
+
 ## Building
 
 For building the exercises on Linux-based distributions, you can use the `gcc` compiler with the command:
