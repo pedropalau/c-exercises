@@ -28,7 +28,7 @@ static bool validate_array(array *arr)
 /**
  * Option callback: create an array with an specific size
  */
-/*@notnull@*/ static array *option_create_array()
+static /*@notnull@*/ array *option_create_array()
 {
 	int size, element, index = 0;
 	array *arr = NULL;
@@ -78,7 +78,7 @@ static bool validate_array(array *arr)
 /**
  * Push an element to the end of the array
  */
-/*@null@*/ static void option_push_array(array *arr)
+static /*@null@*/ void option_push_array(array *arr)
 {
 	if (validate_array(arr))
 	{
@@ -100,7 +100,7 @@ static bool validate_array(array *arr)
 /**
  * Pop an element from end of the array
  */
-static void option_pop_array(array *arr)
+static /*@null@*/ void option_pop_array(array *arr)
 {
 	int last;
 
@@ -123,7 +123,7 @@ static void option_pop_array(array *arr)
 /**
  * Remove the first element from the array
  */
-static void option_shift_array(array *arr)
+static /*@null@*/ void option_shift_array(array *arr)
 {
 	int first;
 
@@ -144,7 +144,7 @@ static void option_shift_array(array *arr)
 /**
  * Insert an element onto the array
  */
-static void option_insert_array(array *arr)
+static /*@null@*/ void option_insert_array(array *arr)
 {
 	int number, position = -1;
 
@@ -174,7 +174,7 @@ static void option_insert_array(array *arr)
 /**
  * Search an element on the array
  */
-static void option_search_array(array *arr)
+static /*@null@*/ void option_search_array(array *arr)
 {
 	int number, index;
 
@@ -206,7 +206,7 @@ static void option_search_array(array *arr)
 /**
  * Calculate the product of elements of the array
  */
-static void option_product_array(array *arr)
+static /*@null@*/ void option_product_array(array *arr)
 {
 	int product;
 
@@ -226,7 +226,7 @@ static void option_product_array(array *arr)
 /**
  * Return the number of occurrences of `number` in the array.
  */
-static void option_count_array(array *arr)
+static /*@null@*/ void option_count_array(array *arr)
 {
 	int count = 0, number;
 

@@ -115,7 +115,7 @@ int array_search(array *arr, int item)
 /**
  * Calculate the product of values in an array
  */
-extern int array_product(array *arr)
+int array_product(array *arr)
 {
 	int i = 0, product = 0;
 	if (arr != NULL && arr->items != NULL)
@@ -135,7 +135,7 @@ extern int array_product(array *arr)
 /**
  * Return the number of occurrences of `x` in the array.
  */
-extern int array_count(array *arr, int x)
+int array_count(array *arr, int x)
 {
 	int count = 0, i = 0;
 	if (arr != NULL && arr->items != NULL)

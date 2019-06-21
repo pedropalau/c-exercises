@@ -20,7 +20,7 @@ IndentWidth: 4
 IndentCaseLabels: true
 
 # Indent if a function definition or declaration is wrapped after the type.
-IndentWrappedFunctionNames: true
+IndentWrappedFunctionNames: false
 
 # The column limit.
 ColumnLimit: 80
@@ -63,11 +63,6 @@ AllowShortIfStatementsOnASingleLine: true
 
 # If true, while (true) continue; can be put on a single line.
 AllowShortLoopsOnASingleLine: true
-
-# Deprecated
-# The function definition return type breaking style to use.
-# This option is deprecated and is retained for backwards compatibility.
-AlwaysBreakAfterDefinitionReturnType: None
 
 # The function declaration return type breaking style to use.
 AlwaysBreakAfterReturnType: None

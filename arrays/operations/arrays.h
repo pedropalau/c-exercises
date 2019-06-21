@@ -40,7 +40,7 @@ extern void array_set(array *arr, int item, int index);
 /**
  * Resize the array
  */
-/*@unused@*/ static void array_resize(array *arr);
+static /*@unused@*/ void array_resize(array *arr);
 
 /**
  * Pop the element of the end of array
@@ -76,8 +76,8 @@ extern int array_count(array *arr, int x);
 /**
  * Delete the array
  */
-/*@null@*/ extern void
-  array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/;
+extern /*@null@*/ void
+array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/;
 
 /**
  * Checks if a value exists in an array

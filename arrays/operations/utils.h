@@ -6,7 +6,7 @@
  * Helper function for repeating a character
  * specific number of times
  */
-/*@notnull@*/ extern char *repeat_str(char *string, int size);
+extern /*@notnull@*/ char *repeat_str(char *string, int size);
 
 /**
  * This function count digits on a number
