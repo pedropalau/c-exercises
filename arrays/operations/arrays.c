@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../../utils/memory.c"
 #include "arrays.h"
 
 /**
@@ -12,11 +13,7 @@
  */
 /*@only@*/ /*@notnull@*/ array *array_create(int count)
 {
-	array *arr = NULL;
-	do
-	{
-		arr = (array *) malloc(sizeof(array));
-	} while (arr == NULL);
+	array *arr = (array *) memory_alloc(sizeof(array));
 
 	arr->size = ARRAY_SIZE;
 	arr->count = count;

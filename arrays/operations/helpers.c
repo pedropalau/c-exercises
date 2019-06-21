@@ -22,7 +22,7 @@ void print_array_divider_values(array *arr)
 	}
 }
 
-void print_array_line(array *arr)
+static void print_array_line(/*@unused@*/ array *arr)
 {
 	char *line = repeat_str(CHAR_NORMAL, LABEL_COLUMN_SIZE - 1);
 	printf("%s", line);
@@ -79,7 +79,7 @@ void print_array_middle(array *arr)
 	print_array_line(arr);
 }
 
-void print_label(char *label, array *arr)
+void print_label(char *label, /*@unused@*/ array *arr)
 {
 	char *spaces =
 	  repeat_str(CHAR_SPACE, LABEL_COLUMN_SIZE - count_chars(label) - 2);
@@ -90,7 +90,7 @@ void print_label(char *label, array *arr)
 	free(spaces);
 }
 
-void print_offset(int value, array *arr)
+static void print_offset(int value, array *arr)
 {
 	int i = 0, n = 0, m = 0, t = 0, x = 0;
 	char *r = NULL;

@@ -95,7 +95,7 @@ void print_options_error()
 
 // @group Array printing related functions
 // ======================================================================
-void print_array_length(array *arr)
+static void print_array_length(array *arr)
 {
 	print_array_start(arr);
 	print_array_fields(arr);
@@ -104,7 +104,7 @@ void print_array_length(array *arr)
 	print_value(arr->count, arr, true);
 }
 
-void print_array_size(array *arr)
+static void print_array_size(array *arr)
 {
 	print_array_middle(arr);
 	print_array_fields(arr);
@@ -113,7 +113,7 @@ void print_array_size(array *arr)
 	print_value((int) arr->size, arr, true);
 }
 
-void print_array_indexes(array *arr)
+static void print_array_indexes(array *arr)
 {
 	print_array_middle(arr);
 	print_array_slots(arr);
@@ -122,7 +122,7 @@ void print_array_indexes(array *arr)
 	print_indexes(arr);
 }
 
-void print_array_elements(array *arr)
+static void print_array_elements(array *arr)
 {
 	print_array_middle(arr);
 	print_array_slots(arr);

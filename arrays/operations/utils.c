@@ -6,25 +6,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../../utils/memory.c"
 #include "utils.h"
 
 /**
  * Helper function for repeating a character
  * specific number of times
  */
-/*@notnull@*/ char *repeat_str(char *string, int size)
+/*@notnull@*/ char *repeat_str(/*@unique@*/ /*@observer@*/ char *string,
+                               int size)
 {
 	char *pa, *pb;
 	size_t length = strlen(string);
-	char *destination = NULL;
-	do
-	{
-		destination = malloc(size * length + 1);
-	} while (destination == NULL);
+	char *destination = memory_alloc(size * length + 1);
+
 	pa = destination + (size - 1) * length;
 	strcpy(pa, string);
 	pb = --pa + length;
 	while (pa >= destination) *pa-- = *pb--;
+
 	return destination;
 }
 
@@ -56,7 +56,7 @@ int count_chars(const char *string)
 /**
  * Join two strings
  */
-void join_str(char *str1, char *str2)
+void __attribute__((unused)) join_str(char *str1, char *str2)
 {
 	char string1[strlen(str1)];
 	char string2[strlen(str2)];
