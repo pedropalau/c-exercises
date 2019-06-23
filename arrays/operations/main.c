@@ -31,7 +31,7 @@ static bool validate_array(array *arr)
 static /*@notnull@*/ array *option_create_array()
 {
 	int size, element, index = 0;
-	array *arr = NULL;
+	/*@null@*/ array *arr = NULL;
 
 	printf_title("Create array", OPTION_CREATE);
 
@@ -78,7 +78,7 @@ static /*@notnull@*/ array *option_create_array()
 /**
  * Push an element to the end of the array
  */
-static /*@null@*/ void option_push_array(array *arr)
+static /*@null@*/ void option_push_array(/*@partial@*/ array *arr)
 {
 	if (validate_array(arr))
 	{
@@ -100,7 +100,7 @@ static /*@null@*/ void option_push_array(array *arr)
 /**
  * Pop an element from end of the array
  */
-static /*@null@*/ void option_pop_array(array *arr)
+static /*@null@*/ void option_pop_array(/*@partial@*/ array *arr)
 {
 	int last;
 
@@ -123,7 +123,7 @@ static /*@null@*/ void option_pop_array(array *arr)
 /**
  * Remove the first element from the array
  */
-static /*@null@*/ void option_shift_array(array *arr)
+static /*@null@*/ void option_shift_array(/*@partial@*/ array *arr)
 {
 	int first;
 
@@ -144,7 +144,7 @@ static /*@null@*/ void option_shift_array(array *arr)
 /**
  * Insert an element onto the array
  */
-static /*@null@*/ void option_insert_array(array *arr)
+static /*@null@*/ void option_insert_array(/*@partial@*/ array *arr)
 {
 	int number, position = -1;
 
@@ -174,7 +174,7 @@ static /*@null@*/ void option_insert_array(array *arr)
 /**
  * Search an element on the array
  */
-static /*@null@*/ void option_search_array(array *arr)
+static /*@null@*/ void option_search_array(/*@partial@*/ array *arr)
 {
 	int number, index;
 
@@ -206,7 +206,7 @@ static /*@null@*/ void option_search_array(array *arr)
 /**
  * Calculate the product of elements of the array
  */
-static /*@null@*/ void option_product_array(array *arr)
+static /*@null@*/ void option_product_array(/*@partial@*/ array *arr)
 {
 	int product;
 
@@ -226,7 +226,7 @@ static /*@null@*/ void option_product_array(array *arr)
 /**
  * Return the number of occurrences of `number` in the array.
  */
-static /*@null@*/ void option_count_array(array *arr)
+static /*@null@*/ void option_count_array(/*@partial@*/ array *arr)
 {
 	int count = 0, number;
 
@@ -308,7 +308,7 @@ int main()
 {
 	int selected;
 
-	/*@notnull@*/ /*@only@*/ array *arr = array_create(0);
+	/*@notnull@*/ array *arr = array_create(0);
 
 	print_main_header();
 
@@ -368,7 +368,7 @@ int main()
 		}
 	} while (selected != OPTION_EXIT);
 
-	if (arr != NULL) { array_free(arr); }
+	array_free(arr);
 
 	printf_success("Exiting program", true);
 

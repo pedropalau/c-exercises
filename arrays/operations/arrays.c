@@ -11,18 +11,13 @@
 /**
  * Create a new array object with an specific size
  */
-/*@only@*/ /*@notnull@*/ array *array_create(int count)
+/*@out@*/ /*@notnull@*/ array *array_create(int count)
 {
 	array *arr = (array *) memory_alloc(sizeof(array));
 
 	arr->size = ARRAY_SIZE;
 	arr->count = count;
-	arr->items = NULL;
-
-	do
-	{
-		arr->items = (int *) calloc(ARRAY_SIZE, sizeof(int));
-	} while (arr->items == NULL);
+	arr->items = (int *) memory_alloc_z(sizeof(int));
 
 	return arr;
 }
@@ -74,7 +69,8 @@ int array_shift(array *arr)
 /**
  * Insert a new item in the array before position `index`.
  */
-void array_insert(array *arr, int item, int index)
+void array_insert(/*@in@*/ array *arr, int item, int index)
+/*@modifies arr@*/
 {
 	if (arr->count > 0 && arr->items != NULL)
 	{
@@ -148,9 +144,10 @@ int array_count(array *arr, int x)
 /**
  * Set the element on the specific inex
  */
-void array_set(array *arr, int item, int index)
+void array_set(/*@partial@*/ array *arr, int item, int index)
+/*@modifies *arr->items@*/
 {
-	if (arr->items != NULL) { arr->items[index] = item; }
+	if (arr != NULL && arr->items != NULL) { arr->items[index] = item; }
 }
 
 /**
@@ -169,7 +166,8 @@ void array_resize(array *arr)
 /**
  * Delete the array and free the used memory
  */
-/*@null@*/ void array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/
+void array_free(
+  /*@only@*/ /*@null@*/ /*@partial@*/ array *arr) /*@modifies arr@*/
 {
 	// array_reset(arr);
 	if (arr != NULL)

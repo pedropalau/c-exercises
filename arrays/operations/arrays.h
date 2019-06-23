@@ -19,13 +19,13 @@ typedef struct array
 	int count;
 
 	// The items of the array
-	/*@only@*/ /*@null@*/ int *items;
+	/*@partial@*/ /*@in@*/ /*@null@*/ int *items;
 } array;
 
 /**
  * Create a new array object with an specific size
  */
-extern /*@only@*/ /*@notnull@*/ array *array_create(int size);
+extern /*@out@*/ /*@notnull@*/ array *array_create(int size);
 
 /**
  * Push one element onto the end of array
@@ -35,7 +35,8 @@ extern void array_push(array *arr, int item);
 /**
  * Set the element on the specific inex
  */
-extern void array_set(array *arr, int item, int index);
+extern void array_set(/*@partial@*/ array *arr, int item,
+                      int index) /*@modifies *arr->items@*/;
 
 /**
  * Resize the array
@@ -55,7 +56,8 @@ extern int array_shift(array *arr);
 /**
  * Insert a new item in the array before position `index`.
  */
-extern void array_insert(array *arr, int item, int index);
+extern void array_insert(/*@in@*/ array *arr, int item,
+                         int index) /*@modifies arr@*/;
 
 /**
  * Searches the array for a given value and returns
@@ -76,8 +78,8 @@ extern int array_count(array *arr, int x);
 /**
  * Delete the array
  */
-extern /*@null@*/ void
-array_free(/*@only@*/ /*@null@*/ array *arr) /*@modifies arr@*/;
+extern void
+array_free(/*@only@*/ /*@null@*/ /*@partial@*/ array *arr) /*@modifies arr@*/;
 
 /**
  * Checks if a value exists in an array
