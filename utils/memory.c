@@ -15,9 +15,16 @@
 		fprintf(stderr,
 		        "Fatal: not possible to allocate requested memory size"
 		        "of %lu bytes).\n",
-		        (unsigned int) size);
+		        (long unsigned int) size);
 		exit(EXIT_FAILURE);
 	}
+	return alloc;
+}
+
+/*@out@*/ /*@notnull@*/ void *memory_alloc_z(size_t size)
+{
+	void *alloc = memory_alloc(size);
+	memset(alloc, 0, size);
 	return alloc;
 }
 
