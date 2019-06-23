@@ -41,7 +41,7 @@ extern void array_set(/*@partial@*/ array *arr, int item,
 /**
  * Resize the array
  */
-static /*@unused@*/ void array_resize(array *arr);
+static /*@unused@*/ void array_resize(/*@in@*/ array *arr);
 
 /**
  * Pop the element of the end of array

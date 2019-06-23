@@ -153,14 +153,15 @@ void array_set(/*@partial@*/ array *arr, int item, int index)
 /**
  * Resize the array
  */
-void array_resize(array *arr)
+void array_resize(/*@in@*/ array *arr)
 {
-	size_t size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
-	// Attempts to resize the memory block reserved for items
-	arr->items = realloc(arr->items, size_for_resize);
-	while (arr->items == NULL)
-	{ arr->items = realloc(arr->items, size_for_resize); }
-	arr->size *= ARRAY_SIZE;
+	if (arr != NULL && arr->items != NULL)
+	{
+		size_t size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
+		// Attempts to resize the memory block reserved for items
+		(void) memory_realloc(arr->items, size_for_resize);
+		arr->size *= ARRAY_SIZE;
+	}
 }
 
 /**
