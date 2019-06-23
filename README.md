@@ -13,6 +13,7 @@ Learn C, instead of just stringing random characters together until it compiles 
 List of useful reads and resources about C language and related tools like Splint and Clang.
 
 - [Splint](http://splint.org/) - Tool for statically checking C programs for security vulnerabilities and coding mistakes
+  - [Complete Manual](http://splint.org/manual/manual.html)
   - [Static Detection of Dynamic Memory Errors](http://www.cs.virginia.edu/~evans/pubs/pldi96.pdf) by David Evans, MIT Laboratory for Computer Science
 
 ## Building
