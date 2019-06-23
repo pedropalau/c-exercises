@@ -17,7 +17,7 @@
 
 	arr->size = ARRAY_SIZE;
 	arr->count = count;
-	arr->items = (int *) memory_alloc_z(sizeof(int));
+	arr->items = (int *) memory_alloc_z(ARRAY_SIZE * sizeof(int));
 
 	return arr;
 }
@@ -159,7 +159,7 @@ void array_resize(/*@in@*/ array *arr)
 	{
 		size_t size_for_resize = (arr->size * ARRAY_SIZE) * sizeof(int);
 		// Attempts to resize the memory block reserved for items
-		(void) memory_realloc(arr->items, size_for_resize);
+		arr->items = memory_realloc(arr->items, size_for_resize);
 		arr->size *= ARRAY_SIZE;
 	}
 }
