@@ -28,4 +28,19 @@
 	return alloc;
 }
 
+/*@out@*/ /*@notnull@*/ void *memory_realloc(/*@in@*/ /*@only@*/ void *pointer,
+                                             size_t new_size)
+{
+	void *alloc = realloc(pointer, new_size);
+	if (alloc == NULL)
+	{
+		fprintf(stderr,
+		        "Fatal: not possible to reallocate requested memory size"
+		        "of %lu bytes).\n",
+		        (long unsigned int) new_size);
+		exit(EXIT_FAILURE);
+	}
+	return alloc;
+}
+
 #endif
